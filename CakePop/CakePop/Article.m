@@ -2,6 +2,8 @@
 //  Article.m
 //  CakePop
 //
+//  Data object for a single article
+//
 //  Created by Christina Yoon on 10/31/13.
 //  Copyright (c) 2013 Yolo. All rights reserved.
 //

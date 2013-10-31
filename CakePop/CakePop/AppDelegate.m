@@ -1,9 +1,11 @@
 //
-//  RVAppDelegate.m
-//  RouletteViewDemo
+//  AppDelegate.m
+//  CakePop
 //
-//  Created by Kenny Tang on 3/16/13.
-//  Copyright (c) 2013 Kenny Tang. All rights reserved.
+//  Tells app where to initially go
+//
+//  Created by Christina Yoon on 10/31/13.
+//  Copyright (c) 2013 Yolo. All rights reserved.
 //
 
 #import "ArticleListViewController.h"

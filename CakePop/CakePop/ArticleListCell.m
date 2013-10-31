@@ -2,6 +2,8 @@
 //  ArticleListCell.m
 //  CakePop
 //
+//  One cell for the article list tableview
+//
 //  Created by Christina Yoon on 10/31/13.
 //  Copyright (c) 2013 Yolo. All rights reserved.
 //
