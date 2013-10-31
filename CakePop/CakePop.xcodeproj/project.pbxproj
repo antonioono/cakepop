@@ -19,6 +19,9 @@
 		2339909818230F1000207BF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2339908018230F1000207BF6 /* UIKit.framework */; };
 		233990A018230F1000207BF6 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 2339909E18230F1000207BF6 /* InfoPlist.strings */; };
 		233990A218230F1000207BF6 /* CakePopTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 233990A118230F1000207BF6 /* CakePopTests.m */; };
+		233990B01823106700207BF6 /* ArticleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 233990AF1823106700207BF6 /* ArticleListViewController.m */; };
+		233990B318231ACF00207BF6 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 233990B218231ACF00207BF6 /* Article.m */; };
+		233990B6182321FB00207BF6 /* ArticleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 233990B5182321FB00207BF6 /* ArticleListCell.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,6 +51,12 @@
 		2339909D18230F1000207BF6 /* CakePopTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "CakePopTests-Info.plist"; sourceTree = "<group>"; };
 		2339909F18230F1000207BF6 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		233990A118230F1000207BF6 /* CakePopTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CakePopTests.m; sourceTree = "<group>"; };
+		233990AE1823106700207BF6 /* ArticleListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListViewController.h; sourceTree = "<group>"; };
+		233990AF1823106700207BF6 /* ArticleListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListViewController.m; sourceTree = "<group>"; };
+		233990B118231ACF00207BF6 /* Article.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Article.h; sourceTree = "<group>"; };
+		233990B218231ACF00207BF6 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
+		233990B4182321FB00207BF6 /* ArticleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListCell.h; sourceTree = "<group>"; };
+		233990B5182321FB00207BF6 /* ArticleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListCell.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +116,12 @@
 		2339908218230F1000207BF6 /* CakePop */ = {
 			isa = PBXGroup;
 			children = (
+				233990B118231ACF00207BF6 /* Article.h */,
+				233990B218231ACF00207BF6 /* Article.m */,
+				233990B4182321FB00207BF6 /* ArticleListCell.h */,
+				233990B5182321FB00207BF6 /* ArticleListCell.m */,
+				233990AE1823106700207BF6 /* ArticleListViewController.h */,
+				233990AF1823106700207BF6 /* ArticleListViewController.m */,
 				2339908B18230F1000207BF6 /* AppDelegate.h */,
 				2339908C18230F1000207BF6 /* AppDelegate.m */,
 				2339908E18230F1000207BF6 /* Images.xcassets */,
@@ -239,7 +254,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				233990B6182321FB00207BF6 /* ArticleListCell.m in Sources */,
+				233990B318231ACF00207BF6 /* Article.m in Sources */,
 				2339908D18230F1000207BF6 /* AppDelegate.m in Sources */,
+				233990B01823106700207BF6 /* ArticleListViewController.m in Sources */,
 				2339908918230F1000207BF6 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
