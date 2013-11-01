@@ -9,8 +9,13 @@
 //
 
 #import "Article.h"
+#import "ArticleListCell.h"
 
 #import "ArticleListViewController.h"
+
+#define NUM_SECTIONS 1
+#define CELL_HEIGHT 100
+
 
 @interface ArticleListViewController() {
 @private
@@ -32,7 +37,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return 1;
+    return NUM_SECTIONS;
 }
 
 /*
@@ -40,7 +45,6 @@
  */
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"Num elem is: %d", [source count]);
     return [source count];
 }
 
@@ -51,15 +55,21 @@
 {
     static NSString* cellIdentifier = @"Cell";
 
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
+   ArticleListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+        cell = [[ArticleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
+       
+        // Configure the cell.
+        Article* article = [source objectAtIndex:indexPath.row];
+        [cell setTitleText:article.titleText];
     }
-    
-    // Configure the cell.
-    Article* article = [source objectAtIndex:indexPath.row];
-    cell.textLabel.text = article.titleText;
+
     return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return CELL_HEIGHT;
 }
 
 /*

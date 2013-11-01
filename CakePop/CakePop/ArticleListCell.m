@@ -16,9 +16,28 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        // Initialization code
+        _title = [[UILabel alloc] init];
+        _title.textAlignment = NSTextAlignmentLeft;
+        
+        [self.contentView addSubview:_title];
+        
     }
     return self;
+}
+
+- (void)setTitleText:(NSString *)titleText
+{
+    _title.text = titleText;
+}
+
+- (void)layoutSubviews
+{
+    CGRect contentRect = self.contentView.bounds;
+    CGFloat boundsX = contentRect.origin.x;
+    
+    //Currently randomly placed frame
+    CGRect labelFrame= CGRectMake(boundsX+70 ,5, 200, 25);
+    _title.frame = labelFrame;
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
