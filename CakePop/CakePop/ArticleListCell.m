@@ -18,9 +18,10 @@
     if (self) {
         _title = [[UILabel alloc] init];
         _title.textAlignment = NSTextAlignmentLeft;
+        _title.textColor = [UIColor blackColor];
+        [_title setBackgroundColor:[UIColor clearColor]];
         
         [self.contentView addSubview:_title];
-        
     }
     return self;
 }

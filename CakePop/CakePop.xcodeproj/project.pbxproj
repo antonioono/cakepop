@@ -22,6 +22,13 @@
 		233990B01823106700207BF6 /* ArticleListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 233990AF1823106700207BF6 /* ArticleListViewController.m */; };
 		233990B318231ACF00207BF6 /* Article.m in Sources */ = {isa = PBXBuildFile; fileRef = 233990B218231ACF00207BF6 /* Article.m */; };
 		233990B6182321FB00207BF6 /* ArticleListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 233990B5182321FB00207BF6 /* ArticleListCell.m */; };
+		233990BE1823300800207BF6 /* homepage_large.3dc33ee8.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233990B81823300800207BF6 /* homepage_large.3dc33ee8.jpg */; };
+		233990BF1823300800207BF6 /* homepage_large.18db360b.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233990B91823300800207BF6 /* homepage_large.18db360b.jpg */; };
+		233990C01823300800207BF6 /* homepage_large.40f96c91.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233990BA1823300800207BF6 /* homepage_large.40f96c91.jpg */; };
+		233990C11823300800207BF6 /* homepage_large.94dc2495.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233990BB1823300800207BF6 /* homepage_large.94dc2495.jpg */; };
+		233990C21823300800207BF6 /* homepage_large.293bfab4.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233990BC1823300800207BF6 /* homepage_large.293bfab4.jpg */; };
+		233990C31823300800207BF6 /* leveragemodels.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233990BD1823300800207BF6 /* leveragemodels.jpg */; };
+		233990C51823308200207BF6 /* paul-mccartney-new-album.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233990C41823308200207BF6 /* paul-mccartney-new-album.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,6 +64,13 @@
 		233990B218231ACF00207BF6 /* Article.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Article.m; sourceTree = "<group>"; };
 		233990B4182321FB00207BF6 /* ArticleListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleListCell.h; sourceTree = "<group>"; };
 		233990B5182321FB00207BF6 /* ArticleListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleListCell.m; sourceTree = "<group>"; };
+		233990B81823300800207BF6 /* homepage_large.3dc33ee8.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = homepage_large.3dc33ee8.jpg; sourceTree = "<group>"; };
+		233990B91823300800207BF6 /* homepage_large.18db360b.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = homepage_large.18db360b.jpg; sourceTree = "<group>"; };
+		233990BA1823300800207BF6 /* homepage_large.40f96c91.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = homepage_large.40f96c91.jpg; sourceTree = "<group>"; };
+		233990BB1823300800207BF6 /* homepage_large.94dc2495.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = homepage_large.94dc2495.jpg; sourceTree = "<group>"; };
+		233990BC1823300800207BF6 /* homepage_large.293bfab4.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = homepage_large.293bfab4.jpg; sourceTree = "<group>"; };
+		233990BD1823300800207BF6 /* leveragemodels.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = leveragemodels.jpg; sourceTree = "<group>"; };
+		233990C41823308200207BF6 /* paul-mccartney-new-album.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "paul-mccartney-new-album.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -125,6 +139,7 @@
 				2339908B18230F1000207BF6 /* AppDelegate.h */,
 				2339908C18230F1000207BF6 /* AppDelegate.m */,
 				2339908E18230F1000207BF6 /* Images.xcassets */,
+				233990B718232FC200207BF6 /* Images */,
 				2339908318230F1000207BF6 /* Supporting Files */,
 			);
 			path = CakePop;
@@ -157,6 +172,20 @@
 				2339909E18230F1000207BF6 /* InfoPlist.strings */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		233990B718232FC200207BF6 /* Images */ = {
+			isa = PBXGroup;
+			children = (
+				233990C41823308200207BF6 /* paul-mccartney-new-album.jpg */,
+				233990B81823300800207BF6 /* homepage_large.3dc33ee8.jpg */,
+				233990B91823300800207BF6 /* homepage_large.18db360b.jpg */,
+				233990BA1823300800207BF6 /* homepage_large.40f96c91.jpg */,
+				233990BB1823300800207BF6 /* homepage_large.94dc2495.jpg */,
+				233990BC1823300800207BF6 /* homepage_large.293bfab4.jpg */,
+				233990BD1823300800207BF6 /* leveragemodels.jpg */,
+			);
+			name = Images;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -234,8 +263,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				233990C31823300800207BF6 /* leveragemodels.jpg in Resources */,
 				2339908718230F1000207BF6 /* InfoPlist.strings in Resources */,
+				233990BE1823300800207BF6 /* homepage_large.3dc33ee8.jpg in Resources */,
+				233990BF1823300800207BF6 /* homepage_large.18db360b.jpg in Resources */,
+				233990C51823308200207BF6 /* paul-mccartney-new-album.jpg in Resources */,
 				2339908F18230F1000207BF6 /* Images.xcassets in Resources */,
+				233990C21823300800207BF6 /* homepage_large.293bfab4.jpg in Resources */,
+				233990C11823300800207BF6 /* homepage_large.94dc2495.jpg in Resources */,
+				233990C01823300800207BF6 /* homepage_large.40f96c91.jpg in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

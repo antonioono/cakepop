@@ -37,7 +37,7 @@
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return NUM_SECTIONS;
+    return 1;
 }
 
 /*
@@ -58,10 +58,14 @@
    ArticleListCell *cell = [tableView dequeueReusableCellWithIdentifier:cellIdentifier];
     if (cell == nil) {
         cell = [[ArticleListCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:cellIdentifier];
-       
-        // Configure the cell.
-        Article* article = [source objectAtIndex:indexPath.row];
-        [cell setTitleText:article.titleText];
+    }
+    
+    // Configure the cell
+    Article* article = [source objectAtIndex:indexPath.row];
+    [cell setTitleText:article.titleText];
+    
+    if (![article.imageName isEqualToString:@""]) {
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[ [UIImage imageNamed:article.imageName]stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
     }
 
     return cell;
@@ -79,7 +83,7 @@
 {
     NSString* article1TitleText = @"Article one title";
     NSString* article1BodyText = @"Article one body text yay";
-    NSString* article1ImageName = @"";
+    NSString* article1ImageName = @"paul-mccartney-new-album.jpg";
     Article* article1 = [[Article alloc] initWithTitleText:article1TitleText bodyText:article1BodyText imageName:article1ImageName];
     
     NSString* article2TitleText = @"Article two title";
