@@ -1,0 +1,9 @@
+/* User > Publication > Bundle > Story */
+
+{
+    "title"     : "This is a title",
+    "author"    : "Author Name",
+    "uri"       : "http://domain.com/uri/to/article",
+    "image"     : "http://domain.com/uri/to/image.png",
+    "text"      : "<p>Lorem ipsum dolor sit amet, <a href='#'>consetetur</a> sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua.</p>"
+}
