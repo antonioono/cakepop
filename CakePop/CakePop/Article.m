@@ -12,11 +12,13 @@
 
 @implementation Article
 
-- (id)initWithTitleText:(NSString *)titleText bodyText:(NSString *)bodyText imageName:(NSString *)imageName
+- (id)initWithTitleText:(NSString *)titleText bodyText:(NSString *)bodyText imageName:(NSString *)imageName authorName:(NSString *)authorName uri:(NSString *)uri
 {
     _titleText = titleText;
     _bodyText = bodyText;
     _imageName = imageName;
+    _authorName = authorName;
+    _uri = uri;
     
     return self;
 }

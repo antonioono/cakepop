@@ -10,8 +10,8 @@
 
 @interface ArticleListCell : UITableViewCell
 
-@property(nonatomic, retain) UILabel* title;
-@property(nonatomic, retain) NSString* backgroundImage;
+@property(nonatomic, strong) UILabel* title;
+@property(nonatomic, strong) NSString* backgroundImage;
 
 - (void)setTitleText:(NSString *)titleText;
 

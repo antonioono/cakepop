@@ -13,5 +13,6 @@
 
 @property (strong, nonatomic) UIWindow *window;
 @property (strong, nonatomic) ArticleListViewController *viewController;
+@property (nonatomic, retain) UINavigationController *navigationController;
 
 @end

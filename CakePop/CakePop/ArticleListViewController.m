@@ -10,6 +10,7 @@
 
 #import "Article.h"
 #import "ArticleListCell.h"
+#import "ArticleViewController.h"
 
 #import "ArticleListViewController.h"
 
@@ -77,6 +78,20 @@
 }
 
 /*
+ * Called when a row in the table is selected
+ */
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Selected row at %d", indexPath.row);
+
+    Article* article = [source objectAtIndex:indexPath.row];
+    
+    ArticleViewController* articleViewController = [[ArticleViewController alloc] initWithArticle:article];
+    
+    [self.navigationController pushViewController:articleViewController animated:YES];
+}
+
+/*
  * Create array that contains all of the Article data objects used to make the cells later on
  */
 - (void)initializeSourceArray
@@ -84,27 +99,37 @@
     NSString* article1TitleText = @"Article one title";
     NSString* article1BodyText = @"Article one body text yay";
     NSString* article1ImageName = @"paul-mccartney-new-album.jpg";
-    Article* article1 = [[Article alloc] initWithTitleText:article1TitleText bodyText:article1BodyText imageName:article1ImageName];
+    NSString* article1AuthorName = @"Author1 name";
+    NSString* article1URI = @"www.article1.com";
+    Article* article1 = [[Article alloc] initWithTitleText:article1TitleText bodyText:article1BodyText imageName:article1ImageName authorName:article1AuthorName uri:article1URI];
     
     NSString* article2TitleText = @"Article two title";
     NSString* article2BodyText = @"Article two body text yay";
     NSString* article2ImageName = @"";
-    Article* article2 = [[Article alloc] initWithTitleText:article2TitleText bodyText:article2BodyText imageName:article2ImageName];
+    NSString* article2AuthorName = @"Author2 name";
+    NSString* article2URI = @"www.article2.com";
+    Article* article2 = [[Article alloc] initWithTitleText:article2TitleText bodyText:article2BodyText imageName:article2ImageName authorName:article2AuthorName uri:article2URI];
     
     NSString* article3TitleText = @"Article three title";
     NSString* article3BodyText = @"Article three body text yay";
     NSString* article3ImageName = @"";
-    Article* article3 = [[Article alloc] initWithTitleText:article3TitleText bodyText:article3BodyText imageName:article3ImageName];
+    NSString* article3AuthorName = @"Author3 name";
+    NSString* article3URI = @"www.article3.com";
+    Article* article3 = [[Article alloc] initWithTitleText:article3TitleText bodyText:article3BodyText imageName:article3ImageName authorName:article3AuthorName uri:article3URI];
     
     NSString* article4TitleText = @"Article four title";
     NSString* article4BodyText = @"Article one body text yay";
     NSString* article4ImageName = @"";
-    Article* article4 = [[Article alloc] initWithTitleText:article4TitleText bodyText:article4BodyText imageName:article4ImageName];
+    NSString* article4AuthorName = @"Author4 name";
+    NSString* article4URI = @"www.article4.com";
+    Article* article4 = [[Article alloc] initWithTitleText:article4TitleText bodyText:article4BodyText imageName:article4ImageName authorName:article4AuthorName uri:article4URI];
     
     NSString* article5TitleText = @"Article five title";
     NSString* article5BodyText = @"Article five body text yay";
     NSString* article5ImageName = @"";
-    Article* article5 = [[Article alloc] initWithTitleText:article5TitleText bodyText:article5BodyText imageName:article5ImageName];
+    NSString* article5AuthorName = @"Author5 name";
+    NSString* article5URI = @"www.article5.com";
+    Article* article5 = [[Article alloc] initWithTitleText:article5TitleText bodyText:article5BodyText imageName:article5ImageName authorName:article5AuthorName uri:article5URI];
     
     [source addObject:article1];
     [source addObject:article2];
