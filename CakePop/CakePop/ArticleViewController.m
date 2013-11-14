@@ -37,7 +37,7 @@
         CGFloat heightOfSubviewsBesidesBodyText = 180;
         UIView *bodyTextView = _articleView.subviews[2];
         
-        NSLog(@")
+        NSLog(@"height of bodyText: %f", bodyTextView.frame.size.height);
         
         CGFloat totalHeight = heightOfSubviewsBesidesBodyText + bodyTextView.frame.size.height;
         
