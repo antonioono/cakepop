@@ -35,7 +35,6 @@
         titleLabel.alpha = 1.0;
         [self addSubview:titleLabel];
         
-        
         // Create image view (used at the top)
         UIImage* image = [UIImage imageNamed:article.imageName];
         coverPhoto = [[UIImageView alloc] initWithImage:image];
@@ -66,7 +65,6 @@
     bodyTextView.frame = CGRectMake(bodyTextSidePadding, 140, self.frame.size.width - bodyTextSidePadding, self.frame.size.height - 140);
     bodyTextView.font = [UIFont fontWithName:@"Helvetica" size:15];
     bodyTextView.text = _article.bodyText;
- 
 }
 
 @end

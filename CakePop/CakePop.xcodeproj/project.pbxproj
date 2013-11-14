@@ -30,6 +30,7 @@
 		233990C31823300800207BF6 /* leveragemodels.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233990BD1823300800207BF6 /* leveragemodels.jpg */; };
 		233990C51823308200207BF6 /* paul-mccartney-new-album.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233990C41823308200207BF6 /* paul-mccartney-new-album.jpg */; };
 		233990C8182DA33000207BF6 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 233990C7182DA33000207BF6 /* ArticleViewController.m */; };
+		233990CB182DA5C600207BF6 /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 233990CA182DA5C600207BF6 /* ArticleView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +75,8 @@
 		233990C41823308200207BF6 /* paul-mccartney-new-album.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = "paul-mccartney-new-album.jpg"; sourceTree = "<group>"; };
 		233990C6182DA33000207BF6 /* ArticleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleViewController.h; sourceTree = "<group>"; };
 		233990C7182DA33000207BF6 /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
+		233990C9182DA5C600207BF6 /* ArticleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleView.h; sourceTree = "<group>"; };
+		233990CA182DA5C600207BF6 /* ArticleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -133,14 +136,9 @@
 		2339908218230F1000207BF6 /* CakePop */ = {
 			isa = PBXGroup;
 			children = (
-				233990B118231ACF00207BF6 /* Article.h */,
-				233990B218231ACF00207BF6 /* Article.m */,
-				233990B4182321FB00207BF6 /* ArticleListCell.h */,
-				233990B5182321FB00207BF6 /* ArticleListCell.m */,
-				233990AE1823106700207BF6 /* ArticleListViewController.h */,
-				233990AF1823106700207BF6 /* ArticleListViewController.m */,
-				233990C6182DA33000207BF6 /* ArticleViewController.h */,
-				233990C7182DA33000207BF6 /* ArticleViewController.m */,
+				233990CE182DA66D00207BF6 /* DataObjects */,
+				233990CD182DA66200207BF6 /* ViewControllers */,
+				233990CC182DA65B00207BF6 /* Views */,
 				2339908B18230F1000207BF6 /* AppDelegate.h */,
 				2339908C18230F1000207BF6 /* AppDelegate.m */,
 				2339908E18230F1000207BF6 /* Images.xcassets */,
@@ -191,6 +189,37 @@
 				233990BD1823300800207BF6 /* leveragemodels.jpg */,
 			);
 			name = Images;
+			sourceTree = "<group>";
+		};
+		233990CC182DA65B00207BF6 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				233990C9182DA5C600207BF6 /* ArticleView.h */,
+				233990CA182DA5C600207BF6 /* ArticleView.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		233990CD182DA66200207BF6 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				233990B4182321FB00207BF6 /* ArticleListCell.h */,
+				233990B5182321FB00207BF6 /* ArticleListCell.m */,
+				233990AE1823106700207BF6 /* ArticleListViewController.h */,
+				233990AF1823106700207BF6 /* ArticleListViewController.m */,
+				233990C6182DA33000207BF6 /* ArticleViewController.h */,
+				233990C7182DA33000207BF6 /* ArticleViewController.m */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		233990CE182DA66D00207BF6 /* DataObjects */ = {
+			isa = PBXGroup;
+			children = (
+				233990B118231ACF00207BF6 /* Article.h */,
+				233990B218231ACF00207BF6 /* Article.m */,
+			);
+			name = DataObjects;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -300,6 +329,7 @@
 				2339908D18230F1000207BF6 /* AppDelegate.m in Sources */,
 				233990B01823106700207BF6 /* ArticleListViewController.m in Sources */,
 				2339908918230F1000207BF6 /* main.m in Sources */,
+				233990CB182DA5C600207BF6 /* ArticleView.m in Sources */,
 				233990C8182DA33000207BF6 /* ArticleViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
