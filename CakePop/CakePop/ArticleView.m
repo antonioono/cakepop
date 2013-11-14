@@ -14,6 +14,7 @@
 @private
     UIImageView* coverPhoto;
     UILabel* titleLabel;
+    UILabel* authorLabel;
     UITextView* bodyTextView;
     CGFloat textHeight;
 }
@@ -32,11 +33,20 @@
         // Create title label
         titleLabel = [[UILabel alloc] init];
         titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        titleLabel.numberOfLines = 0;
+        titleLabel.numberOfLines = 1;
         titleLabel.alpha = 1.0;
-        titleLabel.font = [UIFont fontWithName:@"Arial Bold" size:20];
+        [titleLabel setFont:[UIFont fontWithName:@"Arial" size:18]];
         titleLabel.text = _article.titleText;
         [self addSubview:titleLabel];
+        
+        // Create author label
+        authorLabel = [[UILabel alloc] init];
+        authorLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        authorLabel.numberOfLines = 1;
+        authorLabel.alpha = 1.0;
+        authorLabel.font = [UIFont fontWithName:@"Arial" size:15];
+        authorLabel.text = _article.authorName;
+        [self addSubview:authorLabel];
         
         // Create image view (used at the top)
         UIImage* image = [UIImage imageNamed:article.imageName];
@@ -62,20 +72,26 @@
     // Subview heights
     NSInteger coverPhotoHeight = 100;
     NSInteger titleLabelHeight = 100;
+    NSInteger authorLabelHeight = 100;
     
     // Subview origins
     NSInteger titleHeightOrigin = 70;
-    NSInteger bodyTextHeightOrigin = 140;
+    NSInteger authorHeightOrigin = 90;
+    NSInteger bodyTextHeightOrigin = 150;
     
     // Subview padding
-    NSInteger titleTextSidePadding = 3;
+    NSInteger titleTextSidePadding = 5;
+    NSInteger authorTextSidePadding = 10;
     NSInteger bodyTextSidePadding = 12;
     
     // Coverphoto frame
     coverPhoto.frame = CGRectMake(0,0, self.frame.size.width, coverPhotoHeight);
     
     // TitleLabel frame
-    titleLabel.frame = CGRectMake(titleTextSidePadding, titleHeightOrigin, self.frame.size.width - titleTextSidePadding, titleLabelHeight);
+    titleLabel.frame = CGRectMake(titleTextSidePadding, titleHeightOrigin, self.frame.size.width - (titleTextSidePadding * 2), titleLabelHeight);
+    
+    // AuthorLabel frame
+    authorLabel.frame = CGRectMake(authorTextSidePadding, authorHeightOrigin, self.frame.size.width - (authorTextSidePadding * 2), authorLabelHeight);
     
     // Body Text frame
     CGSize textViewSize = [bodyTextView sizeThatFits:CGSizeMake(bodyTextView.frame.size.width, FLT_MAX)];
