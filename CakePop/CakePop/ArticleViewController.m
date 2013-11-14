@@ -30,8 +30,20 @@
         
         //_article = article;
         _articleView = [[ArticleView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame article:article];
+        
+        NSLog(@"application frame width: %f", [UIScreen mainScreen].applicationFrame.size.width);
+        
+        // This is kinda hacky
+        CGFloat heightOfSubviewsBesidesBodyText = 180;
+        UIView *bodyTextView = _articleView.subviews[2];
+        
+        NSLog(@")
+        
+        CGFloat totalHeight = heightOfSubviewsBesidesBodyText + bodyTextView.frame.size.height;
+        
+        _articleView.contentSize = CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, totalHeight);
+
         self.view = _articleView;
-        //[self.view addSubview:_articleView];
     }
     return self;
 }

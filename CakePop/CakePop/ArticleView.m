@@ -14,7 +14,9 @@
 @private
     UIImageView* coverPhoto;
     UILabel* titleLabel;
+   // UILabel* bodyTextView;
     UITextView* bodyTextView;
+    CGFloat textHeight;
 }
 @end
 
@@ -39,10 +41,20 @@
         UIImage* image = [UIImage imageNamed:article.imageName];
         coverPhoto = [[UIImageView alloc] initWithImage:image];
         [self addSubview:coverPhoto];
-        
+
+        /*
         // Create body text
+        bodyTextView = [[UILabel alloc] initWithFrame:frame];
+        bodyTextView.lineBreakMode = NSLineBreakByWordWrapping;
+        bodyTextView.numberOfLines = 0;
+         */
+        
         bodyTextView = [[UITextView alloc] initWithFrame:frame];
+        bodyTextView.scrollEnabled = NO;
         bodyTextView.editable = NO;
+        bodyTextView.font = [UIFont fontWithName:@"Helvetica" size:12];
+        bodyTextView.text = _article.bodyText;
+        
         [self addSubview:bodyTextView];
     }
     return self;
@@ -54,7 +66,7 @@
 
     NSInteger coverPhotoHeight = 100;
     NSInteger titleTextSidePadding = 3;
-    NSInteger bodyTextSidePadding = 8;
+    NSInteger bodyTextSidePadding = 12;
     
     coverPhoto.frame = CGRectMake(0,0, self.frame.size.width, coverPhotoHeight);
     
@@ -62,9 +74,8 @@
     titleLabel.font = [UIFont fontWithName:@"Arial Bold" size:20];
     titleLabel.text = _article.titleText;
     
-    bodyTextView.frame = CGRectMake(bodyTextSidePadding, 140, self.frame.size.width - bodyTextSidePadding, self.frame.size.height - 210);
-    bodyTextView.font = [UIFont fontWithName:@"Helvetica" size:15];
-    bodyTextView.text = _article.bodyText;
+    CGSize textViewSize = [bodyTextView sizeThatFits:CGSizeMake(bodyTextView.frame.size.width, FLT_MAX)];
+    bodyTextView.frame = CGRectMake(bodyTextSidePadding, 140, self.frame.size.width - (bodyTextSidePadding * 2), textViewSize.height);
 }
 
 @end
