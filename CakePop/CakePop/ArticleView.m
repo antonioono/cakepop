@@ -62,7 +62,7 @@
     titleLabel.font = [UIFont fontWithName:@"Arial Bold" size:20];
     titleLabel.text = _article.titleText;
     
-    bodyTextView.frame = CGRectMake(bodyTextSidePadding, 140, self.frame.size.width - bodyTextSidePadding, self.frame.size.height - 140);
+    bodyTextView.frame = CGRectMake(bodyTextSidePadding, 140, self.frame.size.width - bodyTextSidePadding, self.frame.size.height - 210);
     bodyTextView.font = [UIFont fontWithName:@"Helvetica" size:15];
     bodyTextView.text = _article.bodyText;
 }
