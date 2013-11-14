@@ -14,7 +14,6 @@
 @private
     UIImageView* coverPhoto;
     UILabel* titleLabel;
-   // UILabel* bodyTextView;
     UITextView* bodyTextView;
     CGFloat textHeight;
 }
@@ -35,6 +34,8 @@
         titleLabel.lineBreakMode = NSLineBreakByWordWrapping;
         titleLabel.numberOfLines = 0;
         titleLabel.alpha = 1.0;
+        titleLabel.font = [UIFont fontWithName:@"Arial Bold" size:20];
+        titleLabel.text = _article.titleText;
         [self addSubview:titleLabel];
         
         // Create image view (used at the top)
@@ -42,13 +43,7 @@
         coverPhoto = [[UIImageView alloc] initWithImage:image];
         [self addSubview:coverPhoto];
 
-        /*
         // Create body text
-        bodyTextView = [[UILabel alloc] initWithFrame:frame];
-        bodyTextView.lineBreakMode = NSLineBreakByWordWrapping;
-        bodyTextView.numberOfLines = 0;
-         */
-        
         bodyTextView = [[UITextView alloc] initWithFrame:frame];
         bodyTextView.scrollEnabled = NO;
         bodyTextView.editable = NO;
@@ -64,18 +59,27 @@
 - (void)layoutSubviews {
     [super layoutSubviews];
 
+    // Subview heights
     NSInteger coverPhotoHeight = 100;
+    NSInteger titleLabelHeight = 100;
+    
+    // Subview origins
+    NSInteger titleHeightOrigin = 70;
+    NSInteger bodyTextHeightOrigin = 140;
+    
+    // Subview padding
     NSInteger titleTextSidePadding = 3;
     NSInteger bodyTextSidePadding = 12;
     
+    // Coverphoto frame
     coverPhoto.frame = CGRectMake(0,0, self.frame.size.width, coverPhotoHeight);
     
-    titleLabel.frame = CGRectMake(titleTextSidePadding, 70, self.frame.size.width - titleTextSidePadding, 100);
-    titleLabel.font = [UIFont fontWithName:@"Arial Bold" size:20];
-    titleLabel.text = _article.titleText;
+    // TitleLabel frame
+    titleLabel.frame = CGRectMake(titleTextSidePadding, titleHeightOrigin, self.frame.size.width - titleTextSidePadding, titleLabelHeight);
     
+    // Body Text frame
     CGSize textViewSize = [bodyTextView sizeThatFits:CGSizeMake(bodyTextView.frame.size.width, FLT_MAX)];
-    bodyTextView.frame = CGRectMake(bodyTextSidePadding, 140, self.frame.size.width - (bodyTextSidePadding * 2), textViewSize.height);
+    bodyTextView.frame = CGRectMake(bodyTextSidePadding, bodyTextHeightOrigin, self.frame.size.width - (bodyTextSidePadding * 2), textViewSize.height);
 }
 
 @end

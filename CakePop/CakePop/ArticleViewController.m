@@ -27,22 +27,22 @@
 {
     self = [super init];
     if (self) {
-        
-        //_article = article;
         _articleView = [[ArticleView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame article:article];
         
         NSLog(@"application frame width: %f", [UIScreen mainScreen].applicationFrame.size.width);
         
-        // This is kinda hacky
-        CGFloat heightOfSubviewsBesidesBodyText = 180;
-        UIView *bodyTextView = _articleView.subviews[2];
-        
-        NSLog(@"height of bodyText: %f", bodyTextView.frame.size.height);
-        
-        CGFloat totalHeight = heightOfSubviewsBesidesBodyText + bodyTextView.frame.size.height;
-        
-        _articleView.contentSize = CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, totalHeight);
+        CGFloat heightOfSubviewsBesidesBodyText = 170;
 
+        // TODO: This is kinda hacky, it works but will fix if I have time
+        UITextView* bodyTextView = [[UITextView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
+        bodyTextView.scrollEnabled = NO;
+        bodyTextView.editable = NO;
+        bodyTextView.font = [UIFont fontWithName:@"Helvetica" size:12];
+        bodyTextView.text = article.bodyText;
+        CGSize textViewSize = [bodyTextView sizeThatFits:CGSizeMake(bodyTextView.frame.size.width, FLT_MAX)];
+        
+        CGFloat totalHeight = heightOfSubviewsBesidesBodyText + textViewSize.height;
+        _articleView.contentSize = CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, totalHeight);
         self.view = _articleView;
     }
     return self;
