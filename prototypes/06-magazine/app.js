@@ -76,6 +76,9 @@ function setupParcel(parcel, stories, coverStory, i) {
 	parcelX += scrollOffset;
 	parcelX -=  (width / 3.25)*(backParcelCount+1);
 	
+	// Vary height
+	parcel.y = (cell * 4) + (cell * Math.round(Math.random() * 5));
+	
     // Make first couple parcels old issues
     // console.log(stories.length)
     if ((i <= backParcelCount) && (stories.length > 4)) {
