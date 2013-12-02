@@ -4,6 +4,8 @@ var p               = PSD,
     container       = p["Container-scroll"],
     statusBar       = p["Status bar"],
     curve			= "spring(250, 40, 500)",
+    fastCurve       = "spring(200,30,700)",
+    smoothCurve     = "spring(250, 40, 200)",
     cell			= 24,
 	statusBarHeight = 36,
 	height 			= 1136,
@@ -49,8 +51,8 @@ function setupContainer() {
     container._element.scrollLeft = scrollOffset;
     container.on("scroll", function(){
         // console.log(container._element.scrollLeft)
-        if (container._element.scrollLeft > scrollOffset + width) {
-            container._element.scrollLeft = scrollOffset + width
+        if (container._element.scrollLeft > scrollOffset + 200) {
+            container._element.scrollLeft = scrollOffset + 200
         }
         
         if (parcelOpen) {
@@ -77,33 +79,45 @@ function setupParcel(parcel, stories, coverStory, i) {
 	parcelX -=  (width / 3.25)*(backParcelCount+1);
 	
 	// Vary height
-	parcel.y = (cell * 4) + (cell * Math.round(Math.random() * 5));
+	// parcel.y = (cell * 4) + (cell * Math.round(Math.random() * 5));
 	
     // Make first couple parcels old issues
-    // console.log(stories.length)
     if ((i <= backParcelCount) && (stories.length > 4)) {
-	    setupBackParcel(parcel, stories, i);	
         parcelX -=  (width / 3.25)*(backParcelCount-2);
 	    parcel.x = parcelX+20
+        setupBackParcel(parcel, stories, i);		    
 	} else {
         // Set initial parcel position
-    	parcel.x = width + (width/4) * Math.abs(stories.length - multiple*2) + scrollOffset;
+    	parcel.x = width + scrollOffset;
 
         // Animate in parcels
-        parcel.animate({
-            properties: {
-                x:  parcelX+20
-            },
-            curve: "spring(250, 40, 100)"
-        });
+        setTimeout(function() {
+            parcel.animate({
+                properties: {
+                    x:  parcelX+(cell*2)
+                },
+                curve: fastCurve
+            });
+        }, 250 * (stories.length-i));
+        
 	}
 }
 
 function setupBackParcel(parcel, stories, i) {
-    stories[stories.length-2].subViews[0].subViews[1].opacity = .5;
+//  Dim image
+    stories[stories.length-2].subViews[0].subViews[1].opacity = .333;
+//  Dim logo
+    stories[stories.length-1].opacity = .5;
     parcel.opacity = 0;
+//  Delay appearance of back issues so they don't show before new issues animate in
     setTimeout(function(){
-        parcel.opacity = 1;
+        parcel.animate({
+            properties: {
+                opacity: 1
+            },
+            time: 1500,
+            curve: "ease-out"
+        });
     }, 1000);
 }
 
@@ -112,7 +126,7 @@ function bindParcelEvents(parcel, stories, coverStory, i) {
 		
 		if (!parcelOpen) {
 			openParcel();
-			hideOtherParcels();
+			hideOtherParcels(parcel);
 			parcelOpen = true;
 		}
 		
@@ -123,24 +137,39 @@ function bindParcelEvents(parcel, stories, coverStory, i) {
 				properties: {
 					x: 20 + scrollOffset
 				},
-				curve: "spring(250, 40, 200)"
+				curve: smoothCurve
 			});
+			setTimeout(function() {
+//              Return parcel to top because of variable height
+    			parcel.animate({
+    			    properties: {
+    			         y: statusBarHeight
+    			    },
+    			    curve: "spring(400, 40, 20)"
+    			});
+			}, 1000);
 			for (var k in stories) {
 				layoutStories(k);
-				
 			}
 		}
 		
-		function hideOtherParcels() {
- // 		Hide other bundles
+		function hideOtherParcels(currentParcel) {
+// 		    Hide other parcels
 			for (var j in container.subViews) {
- // 			If not the current bundle
+//  			If not the current parcel
 				if (j != parseInt(i)) {
-					var otherParcel = container.subViews[j];
- // 				Animate to side
+					var otherParcel = container.subViews[j],
+                        otherParcelX;
+                    if (otherParcel.x < currentParcel.x) {
+//   					If to left of current parcel, x is offscreen to left
+                        otherParcelX = scrollOffset - width
+                    } else {
+//   					If to right of current parcel, x is offscreen to right
+                        otherParcelX = width+cell + scrollOffset                        
+                    }
 					otherParcel.animate({
 						properties: {
-						 	x: width+cell + scrollOffset,
+						 	x: otherParcelX,
 						 	y: 50
 						},
 						curve: "spring(400, 40, 20)"
@@ -181,15 +210,15 @@ function bindParcelEvents(parcel, stories, coverStory, i) {
 			setTimeout(function(){
 				story.animate({
 				 	properties: {
-				 		y: (statusBarHeight*3)+(k*256)-42
+				 		y: (statusBarHeight*3) + (cell * (k * 16))
 				 	},
-					curve: "spring(200,30,700)"
+					curve: fastCurve
 				});
 				 
 //	   			Display titles; move to top
 				animateInTitles(story, k);
 //				Move logo to top
-				moveParcelLogo(k)
+				moveLogo(k)
 			}, 1000)
 		 }
 		 
@@ -214,14 +243,15 @@ function bindParcelEvents(parcel, stories, coverStory, i) {
 			}, 50+(100*titleAnimationMultiple))
 		 }
 		 
-		 function moveParcelLogo(k) {
-		  	// 		Move logo
-		  	stories[stories.length-1].animate({
+		 function moveLogo(k) {
+// 		    Move logo
+            var logo = stories[stories.length-1];
+		  	logo.animate({
 		  		properties: {
 		  			// opacity: 0
 		  			scale: .333,
-		  			y: statusBarHeight-12-42,
-		  			x: width/7.5
+		  			y: 0,
+		  			x: (width/2) - (logo.width/1.8125)
 		  			// x: -width/4.5
 		  		},
 		  		time: 300,
@@ -277,7 +307,7 @@ function bindStoryEvents(parcel, stories, coverStory, i, story, j) {
 			properties: {
 				y: 0
 			},
-			curve: "spring(250, 40, 200)"
+			curve: smoothCurve
 		})
 
 		story.animate({
@@ -285,20 +315,21 @@ function bindStoryEvents(parcel, stories, coverStory, i, story, j) {
 				x: -20,
 				y: 0
 			},
-			curve: "spring(250, 40, 200)"
+			curve: smoothCurve
 		});
 		
 		title.animate({
 			properties: {
 				y: height - (title.height + cell*6)
 			},
-			curve: "spring(250, 40, 200)"
+			curve: smoothCurve
 		});
+		
 		body.animate({
 			properties: {
 				y: body.y - cell*4.5
 			},
-			curve: "spring(250, 40, 200)"
+			curve: smoothCurve
 		});
 
 	}
@@ -308,7 +339,7 @@ function bindStoryEvents(parcel, stories, coverStory, i, story, j) {
 			properties: {
 				y: -statusBarHeight*3.5,
 			},
-			curve: "spring(250, 40, 200)"
+			curve: smoothCurve
 		})
 	}
 	
@@ -317,7 +348,7 @@ function bindStoryEvents(parcel, stories, coverStory, i, story, j) {
             properties: {
                 opacity: 0
             },
-            curve: "spring(250, 40, 200)"
+            curve: smoothCurve
         })
 	}
 	
@@ -325,12 +356,19 @@ function bindStoryEvents(parcel, stories, coverStory, i, story, j) {
 		for (k in stories) {
 //	 		If not same index as current story
 			if ((j != k) && (k < stories.length-1)) {
+    			var otherStoryY;
+//     			If above current story
+                if (stories[k].y < stories[j].y) {
+                    otherStoryY = -height
+                } else {
+                    otherStoryY = height
+                }
 				stories[k].animate({
 					properties: {
-						x: 0,
-						y: height*2
+						x: -21,
+						y: otherStoryY
 					},
-					curve: "spring(250, 40, 200)"
+					curve: smoothCurve
 				});
 	
 			}
