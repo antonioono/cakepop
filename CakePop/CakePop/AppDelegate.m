@@ -9,6 +9,8 @@
 //
 
 #import "ArticleListViewController.h"
+#import "PublisherCollectionViewController.h"
+#import "PublisherCollectionViewLayout.h"
 
 #import "AppDelegate.h"
 
@@ -18,10 +20,13 @@
 {
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
-    self.viewController = [[ArticleListViewController alloc] init];
-
+    //self.viewController = [[ArticleListViewController alloc] init];
+    PublisherCollectionViewLayout * collectionViewLayout = [[PublisherCollectionViewLayout alloc] init];
+    self.viewController = [[PublisherCollectionViewController alloc] initWithCollectionViewLayout:collectionViewLayout];
+    
     self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
-    //self.navigationController.navigationBar.hidden = YES;
+   
+    self.navigationController.navigationBar.hidden = YES;
     [self.window addSubview:self.navigationController.view];
     
     self.window.rootViewController = self.navigationController;

@@ -59,6 +59,7 @@
         bodyTextView.editable = NO;
         bodyTextView.font = [UIFont fontWithName:@"Helvetica" size:12];
         bodyTextView.text = _article.bodyText;
+        bodyTextView.backgroundColor = [UIColor clearColor];
         
         [self addSubview:bodyTextView];
     }
@@ -70,14 +71,14 @@
     [super layoutSubviews];
 
     // Subview heights
-    NSInteger coverPhotoHeight = 100;
+    NSInteger coverPhotoHeight = 400;
     NSInteger titleLabelHeight = 100;
     NSInteger authorLabelHeight = 100;
     
     // Subview origins
-    NSInteger titleHeightOrigin = 70;
-    NSInteger authorHeightOrigin = 90;
-    NSInteger bodyTextHeightOrigin = 150;
+    NSInteger titleHeightOrigin = 370;
+    NSInteger authorHeightOrigin = 390;
+    NSInteger bodyTextHeightOrigin = 450;
     
     // Subview padding
     NSInteger titleTextSidePadding = 5;

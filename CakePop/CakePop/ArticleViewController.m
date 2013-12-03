@@ -31,7 +31,7 @@
         
         NSLog(@"application frame width: %f", [UIScreen mainScreen].applicationFrame.size.width);
         
-        CGFloat heightOfSubviewsBesidesBodyText = 170;
+        CGFloat heightOfSubviewsBesidesBodyText = 450;
 
         // TODO: This is kinda hacky, it works but will fix if I have time
         UITextView* bodyTextView = [[UITextView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
@@ -41,8 +41,9 @@
         bodyTextView.text = article.bodyText;
         CGSize textViewSize = [bodyTextView sizeThatFits:CGSizeMake(bodyTextView.frame.size.width, FLT_MAX)];
         
-        CGFloat totalHeight = heightOfSubviewsBesidesBodyText + textViewSize.height;
-        _articleView.contentSize = CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, totalHeight);
+        _articleView.pagingEnabled = YES;
+        _articleView.contentSize = CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, heightOfSubviewsBesidesBodyText + textViewSize.height);
+        
         self.view = _articleView;
     }
     return self;
@@ -56,14 +57,9 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+ 
     
     NSLog(@"View did load for %@", _article.titleText);
-}
-
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end

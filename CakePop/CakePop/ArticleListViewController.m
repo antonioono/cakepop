@@ -15,7 +15,7 @@
 #import "ArticleListViewController.h"
 
 #define NUM_SECTIONS 1
-#define CELL_HEIGHT 100
+#define CELL_HEIGHT 150
 
 
 @interface ArticleListViewController() {
@@ -66,7 +66,7 @@
     [cell setTitleText:article.titleText];
     
     if (![article.imageName isEqualToString:@""]) {
-        cell.backgroundView = [[UIImageView alloc] initWithImage:[ [UIImage imageNamed:article.imageName]stretchableImageWithLeftCapWidth:0.0 topCapHeight:5.0]];
+        cell.backgroundView = [[UIImageView alloc] initWithImage:[UIImage imageNamed:article.imageName]];
     }
 
     return cell;
@@ -86,9 +86,19 @@
 
     Article* article = [source objectAtIndex:indexPath.row];
     
-    ArticleViewController* articleViewController = [[ArticleViewController alloc] initWithArticle:article];
+    /*
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseInOut];
+    [UIView setAnimationDuration:1.0];
+    [UIView commitAnimations];
+*/
     
-    [self.navigationController pushViewController:articleViewController animated:YES];
+    ArticleViewController* articleViewController = [[ArticleViewController alloc] initWithArticle:article];
+    //articleViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    [self presentModalViewController:articleViewController animated:YES];
+    
+    //[self.navigationController pushViewController:articleViewController animated:YES];
 }
 
 /*
@@ -98,7 +108,7 @@
 {
     NSString* article1TitleText = @"Article one title";
     NSString* article1BodyText = @"Article one body text: Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! END OF TEXT";
-    NSString* article1ImageName = @"paul-mccartney-new-album.jpg";
+    NSString* article1ImageName = @"Dismemberment Plan.png";
     NSString* article1AuthorName = @"Author1 name";
     NSString* article1URI = @"www.article1.com";
     Article* article1 = [[Article alloc] initWithTitleText:article1TitleText bodyText:article1BodyText imageName:article1ImageName authorName:article1AuthorName uri:article1URI];

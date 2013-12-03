@@ -8,11 +8,13 @@
 
 #import <UIKit/UIKit.h>
 #import "ArticleListViewController.h"
+#import "PublisherCollectionViewController.h"
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
 
 @property (strong, nonatomic) UIWindow *window;
-@property (strong, nonatomic) ArticleListViewController *viewController;
+//@property (strong, nonatomic) ArticleListViewController *viewController;
+@property (strong, nonatomic) PublisherCollectionViewController *viewController;
 @property (nonatomic, retain) UINavigationController *navigationController;
 
 @end

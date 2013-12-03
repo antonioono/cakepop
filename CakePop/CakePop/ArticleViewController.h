@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ArticleViewController : UIViewController
+@interface ArticleViewController : UIViewController <UIGestureRecognizerDelegate>
 
 @property(nonatomic, strong) Article* article;
 
