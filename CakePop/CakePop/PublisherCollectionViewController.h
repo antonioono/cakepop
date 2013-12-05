@@ -10,4 +10,6 @@
 
 @interface PublisherCollectionViewController : UICollectionViewController
 
+@property (nonatomic, strong) NSArray* visibleCells;
+
 @end

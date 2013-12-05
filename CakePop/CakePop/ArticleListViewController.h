@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+#import "PublisherCollectionViewController.h"
+
 @interface ArticleListViewController : UITableViewController
+
+@property(nonatomic, strong) PublisherCollectionViewController* collectionViewController;
 
 @end

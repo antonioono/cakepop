@@ -36,6 +36,30 @@
     return self;
 }
 
+- (void)viewDidLoad {
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(back)];
+}
+
+- (void)back
+{
+    NSLog(@"Back button was pressed");
+    NSLog(@"CollectionViewController: %@", _collectionViewController);
+    
+    
+    [self.navigationController popViewControllerAnimated:YES];
+    
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDelay:0.0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    UICollectionViewCell* firstCell = _collectionViewController.visibleCells[0];
+    CGRect frame = firstCell.frame;
+    frame.origin.x = frame.origin.x - 300;
+    firstCell.frame = frame;
+    
+    [UIView commitAnimations];
+    _collectionViewController = nil;
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
     return 1;

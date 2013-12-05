@@ -6,6 +6,7 @@
 //  Copyright (c) 2013 Yolo. All rights reserved.
 //
 
+#import "ArticleListViewController.h"
 #import "PublisherCollectionViewCell.h"
 #import "PublisherCollectionViewLayout.h"
 
@@ -13,8 +14,8 @@
 
 @interface PublisherCollectionViewController ()<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
 
-@property (nonatomic, strong) NSMutableArray * imagesArray;
-@property (nonatomic, strong) NSMutableArray * imageNamesArray;
+@property (nonatomic, strong) NSMutableArray* imagesArray;
+@property (nonatomic, strong) NSMutableArray* imageNamesArray;
 
 @end
 
@@ -26,7 +27,7 @@
     [super viewDidLoad];
     [self initImages];
     
-    self.collectionView.frame = CGRectMake(0,0, 1000, [UIScreen mainScreen].applicationFrame.size.height);
+    self.collectionView.frame = CGRectMake(0,0, 2000, [UIScreen mainScreen].applicationFrame.size.height);
     [self.collectionView registerClass:[PublisherCollectionViewCell class] forCellWithReuseIdentifier:@"ItemIdentifier"];
     self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.collectionView.showsHorizontalScrollIndicator = NO;
@@ -67,8 +68,27 @@
 
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     // implement your cell selected logic here
-    UIImageView * selectedImageView = self.imagesArray[indexPath.item];
-    NSLog(@"selected image: %@", selectedImageView);
+    NSLog(@"selected image: %d", indexPath.item);
+    
+    NSArray* visibleCells = self.collectionView.visibleCells;
+    _visibleCells = visibleCells;
+    [UIView beginAnimations:nil context:nil];
+    [UIView setAnimationDuration:0.8];
+    [UIView setAnimationDelay:0.0];
+    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    UICollectionViewCell* firstCell = visibleCells[0];
+    CGRect frame = firstCell.frame;
+    frame.origin.x = frame.origin.x + 300;
+    firstCell.frame = frame;
+
+    [UIView commitAnimations];
+
+    ArticleListViewController* articleListViewController = [[ArticleListViewController alloc] init];
+    articleListViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    articleListViewController.collectionViewController = self;
+    
+    //    [self presentViewController:articleListViewController animated:YES completion:nil];
+    [self.navigationController pushViewController:articleListViewController animated:YES];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
@@ -95,14 +115,16 @@
     self.imagesArray = [NSMutableArray array];
     self.imageNamesArray = [NSMutableArray array];
     
-    UIImageView * image1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"1"]];
+    UIImageView * image1 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Dismemberment Plan.png"]];
     UIImageView * image2 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"2"]];
     UIImageView * image3 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"3"]];
     UIImageView * image4 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"4"]];
     UIImageView * image5 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"5"]];
     UIImageView * image6 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"6"]];
     UIImageView * image7 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"7"]];
-
+    UIImageView * image8 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"8"]];
+    UIImageView * image9 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"9"]];
+    UIImageView * image10 = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"10"]];
     
     [self.imagesArray addObject:image1];
     self.imageNamesArray[0] = @"1";
@@ -115,9 +137,15 @@
     [self.imagesArray addObject:image5];
     self.imageNamesArray[4] = @"5";
     [self.imagesArray addObject:image6];
-    self.imageNamesArray[3] = @"6";
+    self.imageNamesArray[5] = @"6";
     [self.imagesArray addObject:image7];
-    self.imageNamesArray[4] = @"7";
+    self.imageNamesArray[6] = @"7";
+    [self.imagesArray addObject:image8];
+    self.imageNamesArray[7] = @"8";
+    [self.imagesArray addObject:image9];
+    self.imageNamesArray[8] = @"9";
+    [self.imagesArray addObject:image10];
+    self.imageNamesArray[9] = @"10";
 
 }
 
