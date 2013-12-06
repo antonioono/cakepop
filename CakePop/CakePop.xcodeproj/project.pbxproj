@@ -35,7 +35,6 @@
 		23CC082B184D432A008C45F4 /* PublisherCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC082A184D432A008C45F4 /* PublisherCollectionViewController.m */; };
 		23CC082E184D4497008C45F4 /* PublisherCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC082D184D4497008C45F4 /* PublisherCollectionViewCell.m */; };
 		23CC0831184D44B8008C45F4 /* PublisherCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC0830184D44B8008C45F4 /* PublisherCollectionViewLayout.m */; };
-		23CC0833184D4B8E008C45F4 /* RVViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 23CC0832184D4B8E008C45F4 /* RVViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,7 +88,6 @@
 		23CC082D184D4497008C45F4 /* PublisherCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublisherCollectionViewCell.m; sourceTree = "<group>"; };
 		23CC082F184D44B8008C45F4 /* PublisherCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublisherCollectionViewLayout.h; sourceTree = "<group>"; };
 		23CC0830184D44B8008C45F4 /* PublisherCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublisherCollectionViewLayout.m; sourceTree = "<group>"; };
-		23CC0832184D4B8E008C45F4 /* RVViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RVViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,7 +215,6 @@
 		233990CD182DA66200207BF6 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				23CC0832184D4B8E008C45F4 /* RVViewController.xib */,
 				233990B4182321FB00207BF6 /* ArticleListCell.h */,
 				233990B5182321FB00207BF6 /* ArticleListCell.m */,
 				233990AE1823106700207BF6 /* ArticleListViewController.h */,
@@ -328,7 +325,6 @@
 				233990C21823300800207BF6 /* homepage_large.293bfab4.jpg in Resources */,
 				233990C11823300800207BF6 /* homepage_large.94dc2495.jpg in Resources */,
 				233990C01823300800207BF6 /* homepage_large.40f96c91.jpg in Resources */,
-				23CC0833184D4B8E008C45F4 /* RVViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

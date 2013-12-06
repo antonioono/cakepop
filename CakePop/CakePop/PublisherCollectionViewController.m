@@ -17,6 +17,8 @@
 @property (nonatomic, strong) NSMutableArray* imagesArray;
 @property (nonatomic, strong) NSMutableArray* imageNamesArray;
 
+@property (nonatomic, assign) NSInteger currentSelectedCellNumber;
+
 @end
 
 @implementation PublisherCollectionViewController
@@ -59,36 +61,75 @@
 {
     PublisherCollectionViewCell *cell = (PublisherCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ItemIdentifier" forIndexPath:indexPath];
 
-    [cell setNumber:3];
+    [cell setNumber:indexPath.item];
     cell.imageName = self.imageNamesArray[indexPath.item];
     return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
-
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     // implement your cell selected logic here
     NSLog(@"selected image: %d", indexPath.item);
-    
+    _currentSelectedCellNumber = indexPath.item;
+
     NSArray* visibleCells = self.collectionView.visibleCells;
     _visibleCells = visibleCells;
+    [UIView animateWithDuration:1.0
+                          delay:0.0
+                        options: UIViewAnimationCurveEaseOut
+                     animations:^{
+                         
+                         for (int i = 0; i < [visibleCells count]; i++) {
+                             PublisherCollectionViewCell* currentCell = visibleCells[i];
+                             //NSLog(@"Cell number %d has text: %@", i, currentCell.label.text);
+                             if (currentCell.cellNumber < _currentSelectedCellNumber) {
+                                 CGRect frame = currentCell.frame;
+                                 frame.origin.x = frame.origin.x - 300;
+                                 currentCell.frame = frame;
+                             }
+                             
+                             if (currentCell.cellNumber == _currentSelectedCellNumber) {
+                                 CGRect frame = currentCell.frame;
+                                 frame.origin.x = [UIScreen mainScreen].applicationFrame.origin.x;
+                                 currentCell.frame = frame;
+                             }
+                             
+                             if (currentCell.cellNumber > _currentSelectedCellNumber) {
+                                 CGRect frame = currentCell.frame;
+                                 frame.origin.x = frame.origin.x + 300;
+                                 currentCell.frame = frame;
+                             }
+                         }
+                         
+                         
+                         
+                         PublisherCollectionViewCell* firstCell = visibleCells[0];
+                         NSLog(@"Moving cell number: %@", firstCell.label.text);
+                         /*
+                         CGRect frame = firstCell.frame;
+                         frame.origin.x = frame.origin.x + 300;
+                         firstCell.frame = frame;
+                          */
+                     }
+                     completion:^(BOOL finished){
+                         ArticleListViewController* articleListViewController = [[ArticleListViewController alloc] init];
+                         articleListViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                         articleListViewController.collectionViewController = self;
+                         [self.navigationController pushViewController:articleListViewController animated:YES];
+                     }];
+}
+
+- (void)transitionBack {
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:0.8];
+    [UIView setAnimationDuration:1.0];
     [UIView setAnimationDelay:0.0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    UICollectionViewCell* firstCell = visibleCells[0];
+    UICollectionViewCell* firstCell = self.visibleCells[0];
     CGRect frame = firstCell.frame;
-    frame.origin.x = frame.origin.x + 300;
+    frame.origin.x = frame.origin.x - 300;
     firstCell.frame = frame;
-
-    [UIView commitAnimations];
-
-    ArticleListViewController* articleListViewController = [[ArticleListViewController alloc] init];
-    articleListViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-    articleListViewController.collectionViewController = self;
     
-    //    [self presentViewController:articleListViewController animated:YES completion:nil];
-    [self.navigationController pushViewController:articleListViewController animated:YES];
+    [UIView commitAnimations];
 }
 
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {

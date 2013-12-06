@@ -39,6 +39,7 @@
 
 - (void)setNumber:(NSInteger)number {
     self.label.text = [NSString stringWithFormat:@"%d", number];
+    self.cellNumber = number;
 }
 
 /*

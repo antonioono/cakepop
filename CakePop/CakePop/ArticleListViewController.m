@@ -48,13 +48,7 @@
     
     [self.navigationController popViewControllerAnimated:YES];
     
-    [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDelay:0.0];
-    [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
-    UICollectionViewCell* firstCell = _collectionViewController.visibleCells[0];
-    CGRect frame = firstCell.frame;
-    frame.origin.x = frame.origin.x - 300;
-    firstCell.frame = frame;
+    [_collectionViewController transitionBack];
     
     [UIView commitAnimations];
     _collectionViewController = nil;
