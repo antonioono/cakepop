@@ -18,6 +18,7 @@
 @property (nonatomic, strong) NSMutableArray* imageNamesArray;
 
 @property (nonatomic, assign) NSInteger currentSelectedCellNumber;
+@property (nonatomic, assign) CGFloat originalXPosition;
 
 @end
 
@@ -68,7 +69,6 @@
 
 #pragma mark - UICollectionViewDelegate
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
-    // implement your cell selected logic here
     NSLog(@"selected image: %d", indexPath.item);
     _currentSelectedCellNumber = indexPath.item;
 
@@ -78,10 +78,8 @@
                           delay:0.0
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
-                         
                          for (int i = 0; i < [visibleCells count]; i++) {
                              PublisherCollectionViewCell* currentCell = visibleCells[i];
-                             //NSLog(@"Cell number %d has text: %@", i, currentCell.label.text);
                              if (currentCell.cellNumber < _currentSelectedCellNumber) {
                                  CGRect frame = currentCell.frame;
                                  frame.origin.x = frame.origin.x - 300;
@@ -89,8 +87,9 @@
                              }
                              
                              if (currentCell.cellNumber == _currentSelectedCellNumber) {
+                                 _originalXPosition = currentCell.frame.origin.x;
                                  CGRect frame = currentCell.frame;
-                                 frame.origin.x = [UIScreen mainScreen].applicationFrame.origin.x;
+                                 frame.origin.x = self.collectionView.frame.origin.x + self.collectionView.contentOffset.x;
                                  currentCell.frame = frame;
                              }
                              
@@ -100,16 +99,6 @@
                                  currentCell.frame = frame;
                              }
                          }
-                         
-                         
-                         
-                         PublisherCollectionViewCell* firstCell = visibleCells[0];
-                         NSLog(@"Moving cell number: %@", firstCell.label.text);
-                         /*
-                         CGRect frame = firstCell.frame;
-                         frame.origin.x = frame.origin.x + 300;
-                         firstCell.frame = frame;
-                          */
                      }
                      completion:^(BOOL finished){
                          ArticleListViewController* articleListViewController = [[ArticleListViewController alloc] init];
@@ -124,10 +113,33 @@
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationDelay:0.0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+    for (int i = 0; i < [_visibleCells count]; i++) {
+        PublisherCollectionViewCell* currentCell = _visibleCells[i];
+        if (currentCell.cellNumber < _currentSelectedCellNumber) {
+            CGRect frame = currentCell.frame;
+            frame.origin.x = frame.origin.x + 300;
+            currentCell.frame = frame;
+        }
+        
+        if (currentCell.cellNumber == _currentSelectedCellNumber) {
+            CGRect frame = currentCell.frame;
+            frame.origin.x = _originalXPosition;
+            currentCell.frame = frame;
+        }
+        
+        if (currentCell.cellNumber > _currentSelectedCellNumber) {
+            CGRect frame = currentCell.frame;
+            frame.origin.x = frame.origin.x - 300;
+            currentCell.frame = frame;
+        }
+    }
+
+    /*
     UICollectionViewCell* firstCell = self.visibleCells[0];
     CGRect frame = firstCell.frame;
     frame.origin.x = frame.origin.x - 300;
     firstCell.frame = frame;
+    */
     
     [UIView commitAnimations];
 }
