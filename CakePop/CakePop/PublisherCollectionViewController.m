@@ -35,6 +35,8 @@
     self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.showsVerticalScrollIndicator = NO;
+    self.collectionView.bounces = NO;
+    self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 }
 
