@@ -2,6 +2,8 @@
 //  PublisherCollectionViewController.m
 //  CakePop
 //
+//  Controller for collectionview representing all the publishers
+//
 //  Created by Christina Yoon on 12/2/13.
 //  Copyright (c) 2013 Yolo. All rights reserved.
 //
@@ -44,6 +46,8 @@
     self.collectionView.backgroundColor = [UIColor clearColor];
 }
 
+#pragma mark - Status bar stuff
+
 - (BOOL)prefersStatusBarHidden {
     return NO;
 }
@@ -62,12 +66,6 @@
     return CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height + 20);
 }
 
-/*
-- (UIEdgeInsets)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout insetForSectionAtIndex:(NSInteger)section {
-    return UIEdgeInsetsMake(0, 0, 0, -500);
-}
- */
-
 - (NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section {
     return [self.publisherArray count];
 }
@@ -79,13 +77,13 @@
     Publisher* currentPublisher = self.publisherArray[indexPath.item];
     
     [cell setNumber:indexPath.item];
-    //[cell setImage:currentPublisher.imageName isRead:currentPublisher.read];
-    [cell setImage:currentPublisher.imageName isRead:YES];
+    [cell setImageUnread:currentPublisher.imageNameUnread imageNameRead:currentPublisher.imageNameRead isRead:currentPublisher.isRead];
 
     return cell;
 }
 
 #pragma mark - UICollectionViewDelegate
+
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"selected image: %d", indexPath.item);
     _currentSelectedCellNumber = indexPath.item;
@@ -122,6 +120,8 @@
                          ArticleListViewController* articleListViewController = [[ArticleListViewController alloc] init];
                          articleListViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                          articleListViewController.collectionViewController = self;
+                         
+                         [self.publisherArray[indexPath.item] setIsRead:YES];
                          [self presentViewController:articleListViewController animated:YES completion:nil];
                          //[self.navigationController pushViewController:articleListViewController animated:YES];
                      }];
@@ -157,7 +157,7 @@
     
     [UIView commitAnimations];
 }
-
+/*
 - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
     NSLog(@"scrollViewDidEndDecelerating...");
     [self printCurrentCard];
@@ -173,9 +173,10 @@
 - (void)printCurrentCard{
     NSArray * visibleCards = self.collectionView.visibleCells;
     [visibleCards enumerateObjectsUsingBlock:^(PublisherCollectionViewCell * visibleCell, NSUInteger idx, BOOL *stop) {
-        NSLog(@"visible cell: %@", visibleCell.imageName);
+        NSLog(@"visible cell: %@", visibleCell.imageNameUnread);
     }];
 }
+ */
 
 
 - (void) initImages {
@@ -217,14 +218,17 @@
      */
     self.publisherArray = [NSMutableArray array];
     
-    Publisher* publisher1 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
-    Publisher* publisher2 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
-    Publisher* publisher3 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
-    Publisher* publisher4 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
-    Publisher* publisher5 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
-    Publisher* publisher6 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
-    Publisher* publisher7 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
-    
+    Publisher* publisher1 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
+    Publisher* publisher2 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
+    Publisher* publisher3 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
+    Publisher* publisher4 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
+    Publisher* publisher5 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
+    Publisher* publisher6 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
+    Publisher* publisher7 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
+    Publisher* publisher8 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
+    Publisher* publisher9 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
+    Publisher* publisher10 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
+
     [self.publisherArray addObject:publisher1];
     [self.publisherArray addObject:publisher2];
     [self.publisherArray addObject:publisher3];
@@ -232,6 +236,9 @@
     [self.publisherArray addObject:publisher5];
     [self.publisherArray addObject:publisher6];
     [self.publisherArray addObject:publisher7];
+    [self.publisherArray addObject:publisher8];
+    [self.publisherArray addObject:publisher9];
+    [self.publisherArray addObject:publisher10];
 }
 
 @end

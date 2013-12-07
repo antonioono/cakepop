@@ -10,10 +10,11 @@
 
 @interface Publisher : NSObject
 
-@property (nonatomic, strong) NSString* imageName;
-@property (nonatomic, assign) BOOL read;
+@property (nonatomic, strong) NSString* imageNameUnread;
+@property (nonatomic, strong) NSString* imageNameRead;
+@property (nonatomic, assign) BOOL isRead;
 
-- (id)initWithImageName:(NSString *)imageName;
+- (id)initWithImageNameUnread:(NSString *)imageNameUnread imageNameRead:(NSString *)imageNameRead;
 - (void)setIsRead:(BOOL)isRead;
 
 @end

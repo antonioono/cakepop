@@ -37,27 +37,17 @@
     self.cellNumber = number;
 }
 
-- (void)setImage:(NSString*)imageName isRead:(BOOL)isRead
+- (void)setImageUnread:(NSString*)imageNameUnread imageNameRead:(NSString*)imageNameRead isRead:(BOOL)isRead
 {
-    NSLog(@"Item number is: %d, imageName is: %@", self.cellNumber, imageName);
-    self.imageName = imageName;
-    UIImage* image = [UIImage imageNamed:imageName];
-    
+    self.imageNameUnread = imageNameUnread;
+    self.imageNameRead = imageNameRead;
     if (!isRead) {
+        UIImage* image = [UIImage imageNamed:imageNameUnread];
         [self.imageView setImage:image];
     } else {
-        CIContext *context = [CIContext contextWithOptions:nil];
-        CIImage *inputImage = [[CIImage alloc] initWithImage:image]; //your input image
-        
-        CIFilter *filter= [CIFilter filterWithName:@"CIColorControls"];
-        [filter setValue:inputImage forKey:@"inputImage"];
-        [filter setValue:[NSNumber numberWithFloat:0.5] forKey:@"inputBrightness"];
-        
-        // Your output image
-        UIImage *darkenedImage = [UIImage imageWithCGImage:[context createCGImage:filter.outputImage fromRect:filter.outputImage.extent]];
-        [self.imageView setImage:darkenedImage];
+        UIImage* image = [UIImage imageNamed:imageNameRead];
+        [self.imageView setImage:image];
     }
-    
 }
 
 

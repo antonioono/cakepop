@@ -10,6 +10,8 @@
 
 #import "PublisherCollectionViewLayout.h"
 
+#define OVERLAP_SIZE 250
+
 @implementation PublisherCollectionViewLayout
 
 -(id)init
@@ -36,43 +38,11 @@
 
 /*
  * Move the elements a fixed amount to create overlapping of cells
- *
- * Bug: Scrolling to the very last few cells is weird, followed by lots of black (aka avoid scrolling to end)
- */
-/*
-- (NSArray *)layoutAttributesForElementsInRect:(CGRect)rect {
-    NSArray* array = [super layoutAttributesForElementsInRect:rect];
-    
-    NSInteger overlapBetweenCells = -250;
-    
-    for (int i = 1; i < [array count]; i++) {
- 
-        UICollectionViewLayoutAttributes* currentLayoutAttributes = array[i];
-        UICollectionViewLayoutAttributes* prevLayoutAttributes = array[i-1];
-        
-        NSInteger origin = CGRectGetMaxX(prevLayoutAttributes.frame);
-        CGRect frame = currentLayoutAttributes.frame;
-        frame.origin.x = origin + overlapBetweenCells;
-        currentLayoutAttributes.frame = frame;
-        currentLayoutAttributes.zIndex = currentLayoutAttributes.indexPath.item;
- 
-        
-    }
-    
-    return array;
-}
- */
-
-
-/*
- * Move the elements a fixed amount to create overlapping of cells
- *
- * Bug: Scrolling to the very last few cells is weird, followed by lots of black (aka avoid scrolling to end)
  */
 - (NSArray*)layoutAttributesForElementsInRect:(CGRect)rect {
     NSArray * array = [super layoutAttributesForElementsInRect:rect];
     NSMutableArray * modifiedLayoutAttributesArray = [NSMutableArray array];
-    NSInteger overlap = -250;
+    NSInteger overlap = -OVERLAP_SIZE;
     
     [array enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes * layoutAttributes, NSUInteger idx, BOOL *stop) {
         CATransform3D transform = CATransform3DIdentity;
@@ -93,41 +63,19 @@
     return modifiedLayoutAttributesArray;
 }
 
+/*
+ * Kind of weird bug here caused by this or the method above it, but with 10 publishers this looks good. (Will explore if I have time)
+ */
 - (CGSize)collectionViewContentSize
 {
     NSInteger numCells = [self.collectionView numberOfItemsInSection:0];
     
-    return CGSizeMake(150 + (250 * numCells), self.collectionView.frame.size.height);
+    NSInteger numOverlappedPixels = ([UIScreen mainScreen].applicationFrame.size.width - OVERLAP_SIZE) * (numCells - 1);
+    NSInteger numFilledSpaceWithoutOverlap = ([UIScreen mainScreen].applicationFrame.size.width) * numCells + (-1 * (numCells - 1));
+    
+    NSLog(@"Numcells: %d | Overlap: %d | filled Space: %d | difference: %d", numCells, numOverlappedPixels, numFilledSpaceWithoutOverlap, numFilledSpaceWithoutOverlap - numOverlappedPixels);
+    
+    return CGSizeMake(numFilledSpaceWithoutOverlap - numOverlappedPixels, self.collectionView.frame.size.height);
 }
-
-
-/*
-// http://stackoverflow.com/questions/13749401/stopping-the-scroll-in-a-uicollectionview
-
-- (CGPoint)targetContentOffsetForProposedContentOffset:(CGPoint)proposedContentOffset withScrollingVelocity:(CGPoint)velocity {
-    
-    CGFloat offsetAdjustment = CGFLOAT_MAX;
-    CGFloat horizontalCenter = proposedContentOffset.x + (CGRectGetWidth(self.collectionView.bounds) / 1.4f);
-    
-    CGRect targetRect = CGRectMake(proposedContentOffset.x,
-                                   0.0f, self.collectionView.bounds.size.width, self.collectionView.bounds.size.height);
-    
-    NSArray *array = [super layoutAttributesForElementsInRect:targetRect];
-    for (UICollectionViewLayoutAttributes* layoutAttributes in array) {
-        CGFloat distanceFromCenter = layoutAttributes.center.x - horizontalCenter;
-        if (ABS(distanceFromCenter) < ABS(offsetAdjustment)) {
-            offsetAdjustment = distanceFromCenter;
-        }
-    }
-    
-    return CGPointMake(
-                       proposedContentOffset.x + offsetAdjustment,
-                       proposedContentOffset.y);
-}*/
-/*
-- (BOOL)shouldInvalidateLayoutForBoundsChange:(CGRect)newBounds {
-    return YES;
-}
- */
 
 @end

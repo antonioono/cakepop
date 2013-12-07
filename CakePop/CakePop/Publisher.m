@@ -10,17 +10,18 @@
 
 @implementation Publisher
 
-- (id)initWithImageName:(NSString *)imageName
+- (id)initWithImageNameUnread:(NSString *)imageNameUnread imageNameRead:(id)imageNameRead
 {
-    _imageName = imageName;
-    _read = NO;
+    _imageNameUnread = imageNameUnread;
+    _imageNameRead = imageNameRead;
+    _isRead = NO;
     
     return self;
 }
 
 - (void)setIsRead:(BOOL)isRead
 {
-    _read = isRead;
+    _isRead = isRead;
 }
 
 @end
