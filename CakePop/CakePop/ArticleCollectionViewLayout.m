@@ -1,25 +1,23 @@
 //
-//  PublisherCollectionViewLayout.m
+//  ArticleCollectionViewLayout.m
 //  CakePop
 //
-//  Layout for CollectionView representing all the publishers
-//
-//  Created by Christina Yoon on 12/2/13.
+//  Created by Christina Yoon on 12/6/13.
 //  Copyright (c) 2013 Yolo. All rights reserved.
 //
 
-#import "PublisherCollectionViewLayout.h"
+#import "ArticleCollectionViewLayout.h"
 
-#define OVERLAP_SIZE 250
+#define OVERLAP_SIZE 334
 
-@implementation PublisherCollectionViewLayout
+@implementation ArticleCollectionViewLayout
 
 -(id)init
 {
     self = [super init];
     if (self) {
         self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        self.scrollDirection = UICollectionViewScrollDirectionVertical;
     }
     return self;
 }
@@ -28,7 +26,7 @@
     self = [super initWithCoder:aDecoder];
     if (self) {
         self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
-        self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+        self.scrollDirection = UICollectionViewScrollDirectionVertical;
     }
     return self;
 }
@@ -47,7 +45,7 @@
         {
             transform = CATransform3DTranslate(transform, 0, 0, 0);
         } else {
-            transform = CATransform3DTranslate(transform, overlap * layoutAttributes.indexPath.item, 0, 0);
+            transform = CATransform3DTranslate(transform, overlap * layoutAttributes.indexPath.item, 100 * layoutAttributes.indexPath.item, 0);
         }
         layoutAttributes.transform3D = transform;
         
@@ -72,7 +70,7 @@
     
     NSLog(@"Numcells: %d | Overlap: %d | filled Space: %d | difference: %d", numCells, numOverlappedPixels, numFilledSpaceWithoutOverlap, numFilledSpaceWithoutOverlap - numOverlappedPixels);
     
-    return CGSizeMake(numFilledSpaceWithoutOverlap - numOverlappedPixels, self.collectionView.frame.size.height);
+    return CGSizeMake(self.collectionView.frame.size.width, numFilledSpaceWithoutOverlap - numOverlappedPixels);
 }
 
 @end

@@ -1,14 +1,14 @@
 //
-//  PublisherCollectionViewCell.m
+//  ArticleCollectionViewCell.m
 //  CakePop
 //
-//  Created by Christina Yoon on 12/2/13.
+//  Created by Christina Yoon on 12/6/13.
 //  Copyright (c) 2013 Yolo. All rights reserved.
 //
 
-#import "PublisherCollectionViewCell.h"
+#import "ArticleCollectionViewCell.h"
 
-@implementation PublisherCollectionViewCell
+@implementation ArticleCollectionViewCell
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -54,14 +54,14 @@
     [super prepareForReuse];
     [self setNeedsDisplay];
 }
- 
+
 /*
- // Only override drawRect: if you perform custom drawing.
- // An empty implementation adversely affects performance during animation.
- - (void)drawRect:(CGRect)rect
- {
- // Drawing code
- }
- */
+// Only override drawRect: if you perform custom drawing.
+// An empty implementation adversely affects performance during animation.
+- (void)drawRect:(CGRect)rect
+{
+    // Drawing code
+}
+*/
 
 @end

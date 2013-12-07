@@ -10,8 +10,6 @@
 
 @interface PublisherCollectionViewController : UICollectionViewController
 
-@property (nonatomic, strong) NSArray* visibleCells;
-
 - (void)transitionBack;
 
 @end

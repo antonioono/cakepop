@@ -1,23 +1,18 @@
 //
-//  PublisherCollectionViewController.m
+//  ArticleCollectionViewController.m
 //  CakePop
 //
-//  Controller for collectionview representing all the publishers
-//
-//  Created by Christina Yoon on 12/2/13.
+//  Created by Christina Yoon on 12/6/13.
 //  Copyright (c) 2013 Yolo. All rights reserved.
 //
 
-#import "ArticleCollectionViewController.h"
-#import "ArticleCollectionViewLayout.h"
-#import "ArticleListViewController.h"
+#import "ArticleCollectionViewCell.h"
+
 #import "Publisher.h"
-#import "PublisherCollectionViewCell.h"
-#import "PublisherCollectionViewLayout.h"
 
-#import "PublisherCollectionViewController.h"
+#import "ArticleCollectionViewController.h"
 
-@interface PublisherCollectionViewController ()<UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, UICollectionViewDelegate>
+@interface ArticleCollectionViewController ()
 
 @property (nonatomic, assign) NSInteger currentSelectedCellNumber;
 @property (nonatomic, assign) CGFloat originalXPosition;
@@ -26,8 +21,7 @@
 
 @end
 
-@implementation PublisherCollectionViewController
-
+@implementation ArticleCollectionViewController
 
 - (void)viewDidLoad
 {
@@ -36,7 +30,7 @@
     
     self.navigationController.navigationBarHidden = NO;
     self.collectionView.frame = CGRectMake(0, 0, 2000, [UIScreen mainScreen].applicationFrame.size.height);
-    [self.collectionView registerClass:[PublisherCollectionViewCell class] forCellWithReuseIdentifier:@"PublisherCell"];
+    [self.collectionView registerClass:[ArticleCollectionViewCell class] forCellWithReuseIdentifier:@"ArticleCell"];
     self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.showsVerticalScrollIndicator = NO;
@@ -72,13 +66,13 @@
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PublisherCollectionViewCell *cell = (PublisherCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PublisherCell" forIndexPath:indexPath];
-    
+    ArticleCollectionViewCell *cell = (ArticleCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleCell" forIndexPath:indexPath];
+
     Publisher* currentPublisher = self.publisherArray[indexPath.item];
     
     [cell setNumber:indexPath.item];
     [cell setImageUnread:currentPublisher.imageNameUnread imageNameRead:currentPublisher.imageNameRead isRead:currentPublisher.isRead];
-
+    
     return cell;
 }
 
@@ -87,7 +81,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"selected image: %d", indexPath.item);
     _currentSelectedCellNumber = indexPath.item;
-
+    
     NSArray* visibleCells = self.collectionView.visibleCells;
     _visibleCells = visibleCells;
     [UIView animateWithDuration:1.0
@@ -95,7 +89,7 @@
                         options: UIViewAnimationCurveEaseOut
                      animations:^{
                          for (int i = 0; i < [visibleCells count]; i++) {
-                             PublisherCollectionViewCell* currentCell = visibleCells[i];
+                             ArticleCollectionViewCell* currentCell = visibleCells[i];
                              if (currentCell.cellNumber < _currentSelectedCellNumber) {
                                  CGRect frame = currentCell.frame;
                                  frame.origin.x = frame.origin.x - 300;
@@ -124,13 +118,8 @@
                          
                          [self.publisherArray[indexPath.item] setIsRead:YES];
                          [self presentViewController:articleListViewController animated:YES completion:nil];
-                          */
                          //[self.navigationController pushViewController:articleListViewController animated:YES];
-                         
-                         ArticleCollectionViewLayout * collectionViewLayout = [[ArticleCollectionViewLayout alloc] init];
-
-                         ArticleCollectionViewController* articleCollectionViewController = [[ArticleCollectionViewController alloc] initWithCollectionViewLayout:collectionViewLayout];
-                         [self presentViewController:articleCollectionViewController animated:YES completion:nil];
+                          */
                      }];
 }
 
@@ -142,7 +131,7 @@
     [UIView setAnimationDelay:0.0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     for (int i = 0; i < [_visibleCells count]; i++) {
-        PublisherCollectionViewCell* currentCell = _visibleCells[i];
+        ArticleCollectionViewCell* currentCell = _visibleCells[i];
         if (currentCell.cellNumber < _currentSelectedCellNumber) {
             CGRect frame = currentCell.frame;
             frame.origin.x = frame.origin.x + 300;
@@ -165,24 +154,24 @@
     [UIView commitAnimations];
 }
 /*
-- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
-    NSLog(@"scrollViewDidEndDecelerating...");
-    [self printCurrentCard];
-}
-
-- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
-    if (!decelerate){
-        NSLog(@"scrollViewDidEndDragging...");
-        [self printCurrentCard];
-    }
-}
-
-- (void)printCurrentCard{
-    NSArray * visibleCards = self.collectionView.visibleCells;
-    [visibleCards enumerateObjectsUsingBlock:^(PublisherCollectionViewCell * visibleCell, NSUInteger idx, BOOL *stop) {
-        NSLog(@"visible cell: %@", visibleCell.imageNameUnread);
-    }];
-}
+ - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
+ NSLog(@"scrollViewDidEndDecelerating...");
+ [self printCurrentCard];
+ }
+ 
+ - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
+ if (!decelerate){
+ NSLog(@"scrollViewDidEndDragging...");
+ [self printCurrentCard];
+ }
+ }
+ 
+ - (void)printCurrentCard{
+ NSArray * visibleCards = self.collectionView.visibleCells;
+ [visibleCards enumerateObjectsUsingBlock:^(PublisherCollectionViewCell * visibleCell, NSUInteger idx, BOOL *stop) {
+ NSLog(@"visible cell: %@", visibleCell.imageNameUnread);
+ }];
+ }
  */
 
 
@@ -199,7 +188,7 @@
     Publisher* publisher8 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
     Publisher* publisher9 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
     Publisher* publisher10 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-
+    
     [self.publisherArray addObject:publisher1];
     [self.publisherArray addObject:publisher2];
     [self.publisherArray addObject:publisher3];
@@ -211,5 +200,4 @@
     [self.publisherArray addObject:publisher9];
     [self.publisherArray addObject:publisher10];
 }
-
 @end

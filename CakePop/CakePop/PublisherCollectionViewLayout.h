@@ -10,6 +10,4 @@
 
 @interface PublisherCollectionViewLayout : UICollectionViewFlowLayout
 
-@property (nonatomic, weak) UIView * superView;
-
 @end

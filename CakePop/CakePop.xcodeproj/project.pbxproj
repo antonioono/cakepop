@@ -34,6 +34,9 @@
 		233990C51823308200207BF6 /* paul-mccartney-new-album.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 233990C41823308200207BF6 /* paul-mccartney-new-album.jpg */; };
 		233990C8182DA33000207BF6 /* ArticleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 233990C7182DA33000207BF6 /* ArticleViewController.m */; };
 		233990CB182DA5C600207BF6 /* ArticleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 233990CA182DA5C600207BF6 /* ArticleView.m */; };
+		236A5CC21852ADDA002CCD54 /* ArticleCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236A5CC11852ADDA002CCD54 /* ArticleCollectionViewController.m */; };
+		236A5CC51852AE04002CCD54 /* ArticleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 236A5CC41852AE04002CCD54 /* ArticleCollectionViewCell.m */; };
+		236A5CC81852AE25002CCD54 /* ArticleCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 236A5CC71852AE25002CCD54 /* ArticleCollectionViewLayout.m */; };
 		23CC0825184D3E07008C45F4 /* Dismemberment Plan.png in Resources */ = {isa = PBXBuildFile; fileRef = 23CC0824184D3E07008C45F4 /* Dismemberment Plan.png */; };
 		23CC082B184D432A008C45F4 /* PublisherCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC082A184D432A008C45F4 /* PublisherCollectionViewController.m */; };
 		23CC082E184D4497008C45F4 /* PublisherCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC082D184D4497008C45F4 /* PublisherCollectionViewCell.m */; };
@@ -88,6 +91,12 @@
 		233990C7182DA33000207BF6 /* ArticleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleViewController.m; sourceTree = "<group>"; };
 		233990C9182DA5C600207BF6 /* ArticleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleView.h; sourceTree = "<group>"; };
 		233990CA182DA5C600207BF6 /* ArticleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleView.m; sourceTree = "<group>"; };
+		236A5CC01852ADDA002CCD54 /* ArticleCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCollectionViewController.h; sourceTree = "<group>"; };
+		236A5CC11852ADDA002CCD54 /* ArticleCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCollectionViewController.m; sourceTree = "<group>"; };
+		236A5CC31852AE04002CCD54 /* ArticleCollectionViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCollectionViewCell.h; sourceTree = "<group>"; };
+		236A5CC41852AE04002CCD54 /* ArticleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCollectionViewCell.m; sourceTree = "<group>"; };
+		236A5CC61852AE25002CCD54 /* ArticleCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCollectionViewLayout.h; sourceTree = "<group>"; };
+		236A5CC71852AE25002CCD54 /* ArticleCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCollectionViewLayout.m; sourceTree = "<group>"; };
 		23CC0824184D3E07008C45F4 /* Dismemberment Plan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dismemberment Plan.png"; sourceTree = "<group>"; };
 		23CC0829184D432A008C45F4 /* PublisherCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublisherCollectionViewController.h; sourceTree = "<group>"; };
 		23CC082A184D432A008C45F4 /* PublisherCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublisherCollectionViewController.m; sourceTree = "<group>"; };
@@ -236,6 +245,12 @@
 				23CC082D184D4497008C45F4 /* PublisherCollectionViewCell.m */,
 				23CC082F184D44B8008C45F4 /* PublisherCollectionViewLayout.h */,
 				23CC0830184D44B8008C45F4 /* PublisherCollectionViewLayout.m */,
+				236A5CC01852ADDA002CCD54 /* ArticleCollectionViewController.h */,
+				236A5CC11852ADDA002CCD54 /* ArticleCollectionViewController.m */,
+				236A5CC31852AE04002CCD54 /* ArticleCollectionViewCell.h */,
+				236A5CC41852AE04002CCD54 /* ArticleCollectionViewCell.m */,
+				236A5CC61852AE25002CCD54 /* ArticleCollectionViewLayout.h */,
+				236A5CC71852AE25002CCD54 /* ArticleCollectionViewLayout.m */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -356,15 +371,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				236A5CC51852AE04002CCD54 /* ArticleCollectionViewCell.m in Sources */,
 				233990B6182321FB00207BF6 /* ArticleListCell.m in Sources */,
 				233990B318231ACF00207BF6 /* Article.m in Sources */,
 				2339908D18230F1000207BF6 /* AppDelegate.m in Sources */,
 				2308E2DE1852A139007D706F /* Publisher.m in Sources */,
 				233990B01823106700207BF6 /* ArticleListViewController.m in Sources */,
 				2339908918230F1000207BF6 /* main.m in Sources */,
+				236A5CC81852AE25002CCD54 /* ArticleCollectionViewLayout.m in Sources */,
 				23CC0831184D44B8008C45F4 /* PublisherCollectionViewLayout.m in Sources */,
 				233990CB182DA5C600207BF6 /* ArticleView.m in Sources */,
 				233990C8182DA33000207BF6 /* ArticleViewController.m in Sources */,
+				236A5CC21852ADDA002CCD54 /* ArticleCollectionViewController.m in Sources */,
 				23CC082B184D432A008C45F4 /* PublisherCollectionViewController.m in Sources */,
 				23CC082E184D4497008C45F4 /* PublisherCollectionViewCell.m in Sources */,
 			);
