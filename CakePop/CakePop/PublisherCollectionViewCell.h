@@ -11,9 +11,10 @@
 @interface PublisherCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, assign) NSInteger cellNumber;
-@property (nonatomic, strong) NSString * imageName;
-@property (nonatomic, strong) UILabel* label;
+@property (nonatomic, strong) NSString* imageName;
+@property (nonatomic, strong) UIImageView* imageView;
 
 - (void)setNumber:(NSInteger)number;
+- (void)setImage:(NSString*)imageName isRead:(BOOL)isRead;
 
 @end

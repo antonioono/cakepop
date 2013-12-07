@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2308E2DB185292DC007D706F /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 2308E2DA185292DC007D706F /* Default-568h@2x.png */; };
+		2308E2DE1852A139007D706F /* Publisher.m in Sources */ = {isa = PBXBuildFile; fileRef = 2308E2DD1852A139007D706F /* Publisher.m */; };
+		23332DAC185291FC00E6E6F4 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 23332DAB185291FC00E6E6F4 /* Default-568h@2x.png */; };
 		2339907D18230F1000207BF6 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2339907C18230F1000207BF6 /* Foundation.framework */; };
 		2339907F18230F1000207BF6 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2339907E18230F1000207BF6 /* CoreGraphics.framework */; };
 		2339908118230F1000207BF6 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2339908018230F1000207BF6 /* UIKit.framework */; };
@@ -48,6 +51,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2308E2DA185292DC007D706F /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
+		2308E2DC1852A139007D706F /* Publisher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Publisher.h; sourceTree = "<group>"; };
+		2308E2DD1852A139007D706F /* Publisher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Publisher.m; sourceTree = "<group>"; };
+		23332DAB185291FC00E6E6F4 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		2339907918230F1000207BF6 /* CakePop.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = CakePop.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2339907C18230F1000207BF6 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		2339907E18230F1000207BF6 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -117,6 +124,7 @@
 		2339907018230F0F00207BF6 = {
 			isa = PBXGroup;
 			children = (
+				2308E2DA185292DC007D706F /* Default-568h@2x.png */,
 				2339908218230F1000207BF6 /* CakePop */,
 				2339909B18230F1000207BF6 /* CakePopTests */,
 				2339907B18230F1000207BF6 /* Frameworks */,
@@ -153,6 +161,7 @@
 				2339908B18230F1000207BF6 /* AppDelegate.h */,
 				2339908C18230F1000207BF6 /* AppDelegate.m */,
 				2339908E18230F1000207BF6 /* Images.xcassets */,
+				23332DAB185291FC00E6E6F4 /* Default-568h@2x.png */,
 				233990B718232FC200207BF6 /* Images */,
 				2339908318230F1000207BF6 /* Supporting Files */,
 			);
@@ -236,6 +245,8 @@
 			children = (
 				233990B118231ACF00207BF6 /* Article.h */,
 				233990B218231ACF00207BF6 /* Article.m */,
+				2308E2DC1852A139007D706F /* Publisher.h */,
+				2308E2DD1852A139007D706F /* Publisher.m */,
 			);
 			name = DataObjects;
 			sourceTree = "<group>";
@@ -316,9 +327,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				233990C31823300800207BF6 /* leveragemodels.jpg in Resources */,
+				23332DAC185291FC00E6E6F4 /* Default-568h@2x.png in Resources */,
 				2339908718230F1000207BF6 /* InfoPlist.strings in Resources */,
 				233990BE1823300800207BF6 /* homepage_large.3dc33ee8.jpg in Resources */,
 				233990BF1823300800207BF6 /* homepage_large.18db360b.jpg in Resources */,
+				2308E2DB185292DC007D706F /* Default-568h@2x.png in Resources */,
 				233990C51823308200207BF6 /* paul-mccartney-new-album.jpg in Resources */,
 				23CC0825184D3E07008C45F4 /* Dismemberment Plan.png in Resources */,
 				2339908F18230F1000207BF6 /* Images.xcassets in Resources */,
@@ -346,6 +359,7 @@
 				233990B6182321FB00207BF6 /* ArticleListCell.m in Sources */,
 				233990B318231ACF00207BF6 /* Article.m in Sources */,
 				2339908D18230F1000207BF6 /* AppDelegate.m in Sources */,
+				2308E2DE1852A139007D706F /* Publisher.m in Sources */,
 				233990B01823106700207BF6 /* ArticleListViewController.m in Sources */,
 				2339908918230F1000207BF6 /* main.m in Sources */,
 				23CC0831184D44B8008C45F4 /* PublisherCollectionViewLayout.m in Sources */,

@@ -14,13 +14,8 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        self.label = [[UILabel alloc] initWithFrame:self.bounds];
-        self.autoresizesSubviews = YES;
-        self.label.autoresizingMask = (UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight);
-        self.label.font = [UIFont boldSystemFontOfSize:42];
-        self.label.textAlignment = NSTextAlignmentCenter;
-        self.label.adjustsFontSizeToFitWidth = YES;
-        [self addSubview:self.label];
+        self.imageView = [[UIImageView alloc] initWithFrame:self.bounds];
+        [self addSubview:self.imageView];
         
         [self setBackgroundColor:[UIColor whiteColor]];
         
@@ -28,7 +23,7 @@
         CGRect myContentRect = CGRectInset(self.contentView.bounds, borderWidth, borderWidth);
         UIView* myContentView = [[UIView alloc]initWithFrame:myContentRect];
         myContentView.backgroundColor = [UIColor whiteColor];
-        myContentView.layer.borderColor = [UIColor redColor].CGColor;
+        myContentView.layer.borderColor = [UIColor blackColor].CGColor;
         myContentView.layer.borderWidth = borderWidth;
         [self.contentView addSubview:myContentView];
         
@@ -37,17 +32,42 @@
     return self;
 }
 
-- (void)setNumber:(NSInteger)number {
-    self.label.text = [NSString stringWithFormat:@"%d", number];
+- (void)setNumber:(NSInteger)number
+{
     self.cellNumber = number;
 }
 
-/*
- -(void)prepareForReuse {
- [_newsView removeFromSuperview];
- _newsView = nil;
- }
- */
+- (void)setImage:(NSString*)imageName isRead:(BOOL)isRead
+{
+    NSLog(@"Item number is: %d, imageName is: %@", self.cellNumber, imageName);
+    self.imageName = imageName;
+    UIImage* image = [UIImage imageNamed:imageName];
+    
+    if (!isRead) {
+        [self.imageView setImage:image];
+    } else {
+        CIContext *context = [CIContext contextWithOptions:nil];
+        CIImage *inputImage = [[CIImage alloc] initWithImage:image]; //your input image
+        
+        CIFilter *filter= [CIFilter filterWithName:@"CIColorControls"];
+        [filter setValue:inputImage forKey:@"inputImage"];
+        [filter setValue:[NSNumber numberWithFloat:0.5] forKey:@"inputBrightness"];
+        
+        // Your output image
+        UIImage *darkenedImage = [UIImage imageWithCGImage:[context createCGImage:filter.outputImage fromRect:filter.outputImage.extent]];
+        [self.imageView setImage:darkenedImage];
+    }
+    
+}
+
+
+
+
+- (void)prepareForReuse {
+    [super prepareForReuse];
+    [self setNeedsDisplay];
+}
+ 
 /*
  // Only override drawRect: if you perform custom drawing.
  // An empty implementation adversely affects performance during animation.

@@ -16,7 +16,6 @@
 {
     if (!(self = [super init])) return nil;
     
-    self.itemSize = CGSizeMake(100.0f, 153.0f);
     self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
     self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     return self;
@@ -25,7 +24,6 @@
 - (id)initWithCoder:(NSCoder *)aDecoder {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        self.itemSize = CGSizeMake(100.0f, 153.0f);
         self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         self.scrollDirection = UICollectionViewScrollDirectionHorizontal;
     }
@@ -93,6 +91,13 @@
     }];
     
     return modifiedLayoutAttributesArray;
+}
+
+- (CGSize)collectionViewContentSize
+{
+    NSInteger numCells = [self.collectionView numberOfItemsInSection:0];
+    
+    return CGSizeMake(150 + (250 * numCells), self.collectionView.frame.size.height);
 }
 
 

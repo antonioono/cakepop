@@ -37,6 +37,7 @@
 }
 
 - (void)viewDidLoad {
+    //self.navigationController.navigationBarHidden = NO;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemReply target:self action:@selector(back)];
 }
 
@@ -46,7 +47,9 @@
     NSLog(@"CollectionViewController: %@", _collectionViewController);
     
     
-    [self.navigationController popViewControllerAnimated:YES];
+    //[self.navigationController popViewControllerAnimated:YES];
+    [self dismissViewControllerAnimated:YES completion:nil];
+
     
     [_collectionViewController transitionBack];
     

@@ -7,6 +7,7 @@
 //
 
 #import "ArticleListViewController.h"
+#import "Publisher.h"
 #import "PublisherCollectionViewCell.h"
 #import "PublisherCollectionViewLayout.h"
 
@@ -16,6 +17,7 @@
 
 @property (nonatomic, strong) NSMutableArray* imagesArray;
 @property (nonatomic, strong) NSMutableArray* imageNamesArray;
+@property (nonatomic, strong) NSMutableArray* publisherArray;
 
 @property (nonatomic, assign) NSInteger currentSelectedCellNumber;
 @property (nonatomic, assign) CGFloat originalXPosition;
@@ -30,14 +32,24 @@
     [super viewDidLoad];
     [self initImages];
     
-    self.collectionView.frame = CGRectMake(0,0, 2000, [UIScreen mainScreen].applicationFrame.size.height);
-    [self.collectionView registerClass:[PublisherCollectionViewCell class] forCellWithReuseIdentifier:@"ItemIdentifier"];
+    self.navigationController.navigationBarHidden = NO;
+    self.collectionView.frame = CGRectMake(0, 0, 2000, [UIScreen mainScreen].applicationFrame.size.height);
+    [self.collectionView registerClass:[PublisherCollectionViewCell class] forCellWithReuseIdentifier:@"PublisherCell"];
     self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.collectionView.showsHorizontalScrollIndicator = NO;
     self.collectionView.showsVerticalScrollIndicator = NO;
     self.collectionView.bounces = NO;
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateFast;
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.collectionView.backgroundColor = [UIColor clearColor];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return NO;
+}
+
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
 #pragma mark - UICollectionViewDataSource
@@ -47,7 +59,7 @@
 }
 
 - (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout *)collectionViewLayout sizeForItemAtIndexPath:(NSIndexPath *)indexPath {
-    return CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height);
+    return CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height + 20);
 }
 
 /*
@@ -57,15 +69,19 @@
  */
 
 - (NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.imagesArray count];
+    return [self.publisherArray count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    PublisherCollectionViewCell *cell = (PublisherCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ItemIdentifier" forIndexPath:indexPath];
-
+    PublisherCollectionViewCell *cell = (PublisherCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"PublisherCell" forIndexPath:indexPath];
+    
+    Publisher* currentPublisher = self.publisherArray[indexPath.item];
+    
     [cell setNumber:indexPath.item];
-    cell.imageName = self.imageNamesArray[indexPath.item];
+    //[cell setImage:currentPublisher.imageName isRead:currentPublisher.read];
+    [cell setImage:currentPublisher.imageName isRead:YES];
+
     return cell;
 }
 
@@ -106,11 +122,14 @@
                          ArticleListViewController* articleListViewController = [[ArticleListViewController alloc] init];
                          articleListViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                          articleListViewController.collectionViewController = self;
-                         [self.navigationController pushViewController:articleListViewController animated:YES];
+                         [self presentViewController:articleListViewController animated:YES completion:nil];
+                         //[self.navigationController pushViewController:articleListViewController animated:YES];
                      }];
 }
 
 - (void)transitionBack {
+    self.navigationController.navigationBarHidden = YES;
+    
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationDelay:0.0];
@@ -135,13 +154,6 @@
             currentCell.frame = frame;
         }
     }
-
-    /*
-    UICollectionViewCell* firstCell = self.visibleCells[0];
-    CGRect frame = firstCell.frame;
-    frame.origin.x = frame.origin.x - 300;
-    firstCell.frame = frame;
-    */
     
     [UIView commitAnimations];
 }
@@ -167,6 +179,7 @@
 
 
 - (void) initImages {
+    /*
     self.imagesArray = [NSMutableArray array];
     self.imageNamesArray = [NSMutableArray array];
     
@@ -201,7 +214,24 @@
     self.imageNamesArray[8] = @"9";
     [self.imagesArray addObject:image10];
     self.imageNamesArray[9] = @"10";
-
+     */
+    self.publisherArray = [NSMutableArray array];
+    
+    Publisher* publisher1 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
+    Publisher* publisher2 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
+    Publisher* publisher3 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
+    Publisher* publisher4 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
+    Publisher* publisher5 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
+    Publisher* publisher6 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
+    Publisher* publisher7 = [[Publisher alloc] initWithImageName:@"Dismemberment Plan.png"];
+    
+    [self.publisherArray addObject:publisher1];
+    [self.publisherArray addObject:publisher2];
+    [self.publisherArray addObject:publisher3];
+    [self.publisherArray addObject:publisher4];
+    [self.publisherArray addObject:publisher5];
+    [self.publisherArray addObject:publisher6];
+    [self.publisherArray addObject:publisher7];
 }
 
 @end

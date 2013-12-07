@@ -24,12 +24,12 @@
     PublisherCollectionViewLayout * collectionViewLayout = [[PublisherCollectionViewLayout alloc] init];
     self.viewController = [[PublisherCollectionViewController alloc] initWithCollectionViewLayout:collectionViewLayout];
     
-    self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
+    //self.navigationController = [[UINavigationController alloc] initWithRootViewController:self.viewController];
    
     //self.navigationController.navigationBar.hidden = YES;
-    [self.window addSubview:self.navigationController.view];
+    //[self.window addSubview:self.navigationController.view];
     
-    self.window.rootViewController = self.navigationController;
+    self.window.rootViewController = self.viewController;
     [self.window makeKeyAndVisible];
     return YES;
 }
