@@ -19,6 +19,16 @@
     return self;
 }
 
+- (id)initWithImageNameUnread:(NSString *)imageNameUnread imageNameRead:(id)imageNameRead headerLogoImage:(NSString *)headerLogoImage
+{
+    _imageNameUnread = imageNameUnread;
+    _imageNameRead = imageNameRead;
+    _headerLogoImage = headerLogoImage;
+    _isRead = NO;
+    
+    return self;
+}
+
 - (void)setIsRead:(BOOL)isRead
 {
     _isRead = isRead;

@@ -8,7 +8,7 @@
 
 #import "ArticleCollectionViewLayout.h"
 
-#define OVERLAP_SIZE 334
+#define ADJUSTMENT 33
 
 @implementation ArticleCollectionViewLayout
 
@@ -18,6 +18,8 @@
     if (self) {
         self.sectionInset = UIEdgeInsetsMake(0, 0, 0, 0);
         self.scrollDirection = UICollectionViewScrollDirectionVertical;
+        self.headerReferenceSize = CGSizeMake(0, 100);
+
     }
     return self;
 }
@@ -35,9 +37,10 @@
  * Move the elements a fixed amount to create overlapping of cells
  */
 - (NSArray*)layoutAttributesForElementsInRect:(CGRect)rect {
+    NSLog(@"Width of screen: %f", [UIScreen mainScreen].bounds.size.width);
     NSArray * array = [super layoutAttributesForElementsInRect:rect];
     NSMutableArray * modifiedLayoutAttributesArray = [NSMutableArray array];
-    NSInteger overlap = -OVERLAP_SIZE;
+    NSInteger overlap = [UIScreen mainScreen].bounds.size.width + ADJUSTMENT;
     
     [array enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes * layoutAttributes, NSUInteger idx, BOOL *stop) {
         CATransform3D transform = CATransform3DIdentity;
@@ -45,7 +48,7 @@
         {
             transform = CATransform3DTranslate(transform, 0, 0, 0);
         } else {
-            transform = CATransform3DTranslate(transform, overlap * layoutAttributes.indexPath.item, 100 * layoutAttributes.indexPath.item, 0);
+            transform = CATransform3DTranslate(transform, -(overlap * layoutAttributes.indexPath.item), 100 * layoutAttributes.indexPath.item, 0);
         }
         layoutAttributes.transform3D = transform;
         
@@ -64,8 +67,9 @@
 - (CGSize)collectionViewContentSize
 {
     NSInteger numCells = [self.collectionView numberOfItemsInSection:0];
+    NSInteger overlap = [UIScreen mainScreen].bounds.size.width + self.minimumInteritemSpacing;
     
-    NSInteger numOverlappedPixels = ([UIScreen mainScreen].applicationFrame.size.width - OVERLAP_SIZE) * (numCells - 1);
+    NSInteger numOverlappedPixels = ([UIScreen mainScreen].applicationFrame.size.width - overlap) * (numCells - 1);
     NSInteger numFilledSpaceWithoutOverlap = ([UIScreen mainScreen].applicationFrame.size.width) * numCells + (-1 * (numCells - 1));
     
     NSLog(@"Numcells: %d | Overlap: %d | filled Space: %d | difference: %d", numCells, numOverlappedPixels, numFilledSpaceWithoutOverlap, numFilledSpaceWithoutOverlap - numOverlappedPixels);

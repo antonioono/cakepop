@@ -37,6 +37,9 @@
 		236A5CC21852ADDA002CCD54 /* ArticleCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 236A5CC11852ADDA002CCD54 /* ArticleCollectionViewController.m */; };
 		236A5CC51852AE04002CCD54 /* ArticleCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 236A5CC41852AE04002CCD54 /* ArticleCollectionViewCell.m */; };
 		236A5CC81852AE25002CCD54 /* ArticleCollectionViewLayout.m in Sources */ = {isa = PBXBuildFile; fileRef = 236A5CC71852AE25002CCD54 /* ArticleCollectionViewLayout.m */; };
+		239D3E401853F8C400FE6FD9 /* ArticleCollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 239D3E3F1853F8C400FE6FD9 /* ArticleCollectionViewHeader.m */; };
+		239D3E421853FF8500FE6FD9 /* The_New_York_Times.png in Resources */ = {isa = PBXBuildFile; fileRef = 239D3E411853FF8500FE6FD9 /* The_New_York_Times.png */; };
+		239D3E4418541FC900FE6FD9 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 239D3E4318541FC900FE6FD9 /* logo.png */; };
 		23CC0825184D3E07008C45F4 /* Dismemberment Plan.png in Resources */ = {isa = PBXBuildFile; fileRef = 23CC0824184D3E07008C45F4 /* Dismemberment Plan.png */; };
 		23CC082B184D432A008C45F4 /* PublisherCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC082A184D432A008C45F4 /* PublisherCollectionViewController.m */; };
 		23CC082E184D4497008C45F4 /* PublisherCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC082D184D4497008C45F4 /* PublisherCollectionViewCell.m */; };
@@ -97,6 +100,10 @@
 		236A5CC41852AE04002CCD54 /* ArticleCollectionViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCollectionViewCell.m; sourceTree = "<group>"; };
 		236A5CC61852AE25002CCD54 /* ArticleCollectionViewLayout.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCollectionViewLayout.h; sourceTree = "<group>"; };
 		236A5CC71852AE25002CCD54 /* ArticleCollectionViewLayout.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCollectionViewLayout.m; sourceTree = "<group>"; };
+		239D3E3E1853F8C400FE6FD9 /* ArticleCollectionViewHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ArticleCollectionViewHeader.h; sourceTree = "<group>"; };
+		239D3E3F1853F8C400FE6FD9 /* ArticleCollectionViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCollectionViewHeader.m; sourceTree = "<group>"; };
+		239D3E411853FF8500FE6FD9 /* The_New_York_Times.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = The_New_York_Times.png; sourceTree = "<group>"; };
+		239D3E4318541FC900FE6FD9 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		23CC0824184D3E07008C45F4 /* Dismemberment Plan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dismemberment Plan.png"; sourceTree = "<group>"; };
 		23CC0829184D432A008C45F4 /* PublisherCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublisherCollectionViewController.h; sourceTree = "<group>"; };
 		23CC082A184D432A008C45F4 /* PublisherCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublisherCollectionViewController.m; sourceTree = "<group>"; };
@@ -210,13 +217,15 @@
 			isa = PBXGroup;
 			children = (
 				23CC0824184D3E07008C45F4 /* Dismemberment Plan.png */,
-				233990C41823308200207BF6 /* paul-mccartney-new-album.jpg */,
-				233990B81823300800207BF6 /* homepage_large.3dc33ee8.jpg */,
 				233990B91823300800207BF6 /* homepage_large.18db360b.jpg */,
+				233990BC1823300800207BF6 /* homepage_large.293bfab4.jpg */,
+				233990B81823300800207BF6 /* homepage_large.3dc33ee8.jpg */,
 				233990BA1823300800207BF6 /* homepage_large.40f96c91.jpg */,
 				233990BB1823300800207BF6 /* homepage_large.94dc2495.jpg */,
-				233990BC1823300800207BF6 /* homepage_large.293bfab4.jpg */,
 				233990BD1823300800207BF6 /* leveragemodels.jpg */,
+				239D3E4318541FC900FE6FD9 /* logo.png */,
+				233990C41823308200207BF6 /* paul-mccartney-new-album.jpg */,
+				239D3E411853FF8500FE6FD9 /* The_New_York_Times.png */,
 			);
 			name = Images;
 			sourceTree = "<group>";
@@ -226,6 +235,8 @@
 			children = (
 				233990C9182DA5C600207BF6 /* ArticleView.h */,
 				233990CA182DA5C600207BF6 /* ArticleView.m */,
+				239D3E3E1853F8C400FE6FD9 /* ArticleCollectionViewHeader.h */,
+				239D3E3F1853F8C400FE6FD9 /* ArticleCollectionViewHeader.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -345,12 +356,14 @@
 				23332DAC185291FC00E6E6F4 /* Default-568h@2x.png in Resources */,
 				2339908718230F1000207BF6 /* InfoPlist.strings in Resources */,
 				233990BE1823300800207BF6 /* homepage_large.3dc33ee8.jpg in Resources */,
+				239D3E4418541FC900FE6FD9 /* logo.png in Resources */,
 				233990BF1823300800207BF6 /* homepage_large.18db360b.jpg in Resources */,
 				2308E2DB185292DC007D706F /* Default-568h@2x.png in Resources */,
 				233990C51823308200207BF6 /* paul-mccartney-new-album.jpg in Resources */,
 				23CC0825184D3E07008C45F4 /* Dismemberment Plan.png in Resources */,
 				2339908F18230F1000207BF6 /* Images.xcassets in Resources */,
 				233990C21823300800207BF6 /* homepage_large.293bfab4.jpg in Resources */,
+				239D3E421853FF8500FE6FD9 /* The_New_York_Times.png in Resources */,
 				233990C11823300800207BF6 /* homepage_large.94dc2495.jpg in Resources */,
 				233990C01823300800207BF6 /* homepage_large.40f96c91.jpg in Resources */,
 			);
@@ -371,6 +384,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				239D3E401853F8C400FE6FD9 /* ArticleCollectionViewHeader.m in Sources */,
 				236A5CC51852AE04002CCD54 /* ArticleCollectionViewCell.m in Sources */,
 				233990B6182321FB00207BF6 /* ArticleListCell.m in Sources */,
 				233990B318231ACF00207BF6 /* Article.m in Sources */,

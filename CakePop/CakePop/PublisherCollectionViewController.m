@@ -130,6 +130,7 @@
                          ArticleCollectionViewLayout * collectionViewLayout = [[ArticleCollectionViewLayout alloc] init];
 
                          ArticleCollectionViewController* articleCollectionViewController = [[ArticleCollectionViewController alloc] initWithCollectionViewLayout:collectionViewLayout];
+                         articleCollectionViewController.publisher = _publisherArray[_currentSelectedCellNumber];
                          [self presentViewController:articleCollectionViewController animated:YES completion:nil];
                      }];
 }
@@ -189,16 +190,16 @@
 - (void) initImages {
     self.publisherArray = [NSMutableArray array];
     
-    Publisher* publisher1 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher2 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher3 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher4 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher5 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher6 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher7 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher8 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher9 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher10 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
+    Publisher* publisher1 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"The_New_York_Times.png"];
+    Publisher* publisher2 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"The_New_York_Times.png"];
+    Publisher* publisher3 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"The_New_York_Times.png"];
+    Publisher* publisher4 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"The_New_York_Times.png"];
+    Publisher* publisher5 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"The_New_York_Times.png"];
+    Publisher* publisher6 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"The_New_York_Times.png"];
+    Publisher* publisher7 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"The_New_York_Times.png"];
+    Publisher* publisher8 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"The_New_York_Times.png"];
+    Publisher* publisher9 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"The_New_York_Times.png"];
+    Publisher* publisher10 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"The_New_York_Times.png"];
 
     [self.publisherArray addObject:publisher1];
     [self.publisherArray addObject:publisher2];

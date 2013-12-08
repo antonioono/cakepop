@@ -2,6 +2,7 @@
 //  ArticleListViewController.m
 //  CakePop
 //
+//  Not used anymore: Was the tableview used beforehand
 //  ViewController for the ArticleListTableView (View with the list of articles)
 //
 //  Created by Christina Yoon on 10/31/13.

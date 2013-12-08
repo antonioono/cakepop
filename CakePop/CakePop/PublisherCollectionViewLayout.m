@@ -67,6 +67,8 @@
 {
     NSInteger numCells = [self.collectionView numberOfItemsInSection:0];
     
+    NSLog(@"mainscreen width: %f", [UIScreen mainScreen].applicationFrame.size.width);
+    
     NSInteger numOverlappedPixels = ([UIScreen mainScreen].applicationFrame.size.width - OVERLAP_SIZE) * (numCells - 1);
     NSInteger numFilledSpaceWithoutOverlap = ([UIScreen mainScreen].applicationFrame.size.width) * numCells + (-1 * (numCells - 1));
     

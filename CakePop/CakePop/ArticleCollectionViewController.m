@@ -7,10 +7,13 @@
 //
 
 #import "ArticleCollectionViewCell.h"
+#import "ArticleCollectionViewHeader.h"
 
 #import "Publisher.h"
 
 #import "ArticleCollectionViewController.h"
+
+#define HEADER_SIZE 60
 
 @interface ArticleCollectionViewController ()
 
@@ -28,8 +31,11 @@
     [super viewDidLoad];
     [self initImages];
     
-    self.navigationController.navigationBarHidden = NO;
-    self.collectionView.frame = CGRectMake(0, 0, 2000, [UIScreen mainScreen].applicationFrame.size.height);
+    [self.collectionView registerClass:[ArticleCollectionViewHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
+    withReuseIdentifier:@"HeaderView"];
+    
+    self.view.backgroundColor = [UIColor blackColor];
+    self.collectionView.frame = CGRectMake(0, 0, 3500, 5 *[UIScreen mainScreen].applicationFrame.size.height);
     [self.collectionView registerClass:[ArticleCollectionViewCell class] forCellWithReuseIdentifier:@"ArticleCell"];
     self.collectionView.indicatorStyle = UIScrollViewIndicatorStyleWhite;
     self.collectionView.showsHorizontalScrollIndicator = NO;
@@ -38,6 +44,24 @@
     self.collectionView.decelerationRate = UIScrollViewDecelerationRateNormal;
     self.collectionView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
     self.collectionView.backgroundColor = [UIColor clearColor];
+}
+
+- (UICollectionReusableView *)collectionView:(UICollectionView *)cv viewForSupplementaryElementOfKind:(NSString *)kind atIndexPath:(NSIndexPath *)indexPath {
+    UICollectionReusableView *reusableView = nil;
+
+    if (kind == UICollectionElementKindSectionHeader) {
+        ArticleCollectionViewHeader *collectionHeader = [self.collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
+
+        [collectionHeader setHeaderImageName:_publisher.headerLogoImage];
+        
+        reusableView = collectionHeader;
+    }
+    return reusableView;
+}
+
+- (CGSize)collectionView:(UICollectionView *)collectionView layout:(UICollectionViewLayout*)collectionViewLayout referenceSizeForHeaderInSection:(NSInteger)section;
+{
+    return CGSizeMake([UIScreen mainScreen].bounds.size.width, HEADER_SIZE);
 }
 
 #pragma mark - Status bar stuff
@@ -81,7 +105,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"selected image: %d", indexPath.item);
     _currentSelectedCellNumber = indexPath.item;
-    
+    /*
     NSArray* visibleCells = self.collectionView.visibleCells;
     _visibleCells = visibleCells;
     [UIView animateWithDuration:1.0
@@ -110,8 +134,9 @@
                              }
                          }
                      }
+
                      completion:^(BOOL finished){
-                         /*
+                         
                          ArticleListViewController* articleListViewController = [[ArticleListViewController alloc] init];
                          articleListViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                          articleListViewController.collectionViewController = self;
@@ -119,8 +144,9 @@
                          [self.publisherArray[indexPath.item] setIsRead:YES];
                          [self presentViewController:articleListViewController animated:YES completion:nil];
                          //[self.navigationController pushViewController:articleListViewController animated:YES];
-                          */
+                         
                      }];
+          */
 }
 
 - (void)transitionBack {
