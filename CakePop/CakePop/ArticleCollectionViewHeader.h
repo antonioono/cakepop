@@ -19,6 +19,5 @@
 
 @property(nonatomic, strong) id<ArticleCollectionViewHeaderDelegate> delegate;
 @property(nonatomic, strong) NSString* headerImageName;
-@property(nonatomic, strong) UIImageView* imageView;
 
 @end

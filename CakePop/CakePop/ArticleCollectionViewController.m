@@ -13,7 +13,7 @@
 
 #import "ArticleCollectionViewController.h"
 
-#define HEADER_SIZE 60
+#define HEADER_SIZE 70
 
 @interface ArticleCollectionViewController ()
 

@@ -40,6 +40,7 @@
 		239D3E401853F8C400FE6FD9 /* ArticleCollectionViewHeader.m in Sources */ = {isa = PBXBuildFile; fileRef = 239D3E3F1853F8C400FE6FD9 /* ArticleCollectionViewHeader.m */; };
 		239D3E421853FF8500FE6FD9 /* The_New_York_Times.png in Resources */ = {isa = PBXBuildFile; fileRef = 239D3E411853FF8500FE6FD9 /* The_New_York_Times.png */; };
 		239D3E4418541FC900FE6FD9 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 239D3E4318541FC900FE6FD9 /* logo.png */; };
+		239F1BAE185502B30003CA74 /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 239F1BAD185502B30003CA74 /* backButton.png */; };
 		23CC0825184D3E07008C45F4 /* Dismemberment Plan.png in Resources */ = {isa = PBXBuildFile; fileRef = 23CC0824184D3E07008C45F4 /* Dismemberment Plan.png */; };
 		23CC082B184D432A008C45F4 /* PublisherCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC082A184D432A008C45F4 /* PublisherCollectionViewController.m */; };
 		23CC082E184D4497008C45F4 /* PublisherCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC082D184D4497008C45F4 /* PublisherCollectionViewCell.m */; };
@@ -104,6 +105,7 @@
 		239D3E3F1853F8C400FE6FD9 /* ArticleCollectionViewHeader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ArticleCollectionViewHeader.m; sourceTree = "<group>"; };
 		239D3E411853FF8500FE6FD9 /* The_New_York_Times.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = The_New_York_Times.png; sourceTree = "<group>"; };
 		239D3E4318541FC900FE6FD9 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
+		239F1BAD185502B30003CA74 /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
 		23CC0824184D3E07008C45F4 /* Dismemberment Plan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dismemberment Plan.png"; sourceTree = "<group>"; };
 		23CC0829184D432A008C45F4 /* PublisherCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublisherCollectionViewController.h; sourceTree = "<group>"; };
 		23CC082A184D432A008C45F4 /* PublisherCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublisherCollectionViewController.m; sourceTree = "<group>"; };
@@ -216,15 +218,16 @@
 		233990B718232FC200207BF6 /* Images */ = {
 			isa = PBXGroup;
 			children = (
-				23CC0824184D3E07008C45F4 /* Dismemberment Plan.png */,
+				239F1BAD185502B30003CA74 /* backButton.png */,
 				233990B91823300800207BF6 /* homepage_large.18db360b.jpg */,
 				233990BC1823300800207BF6 /* homepage_large.293bfab4.jpg */,
 				233990B81823300800207BF6 /* homepage_large.3dc33ee8.jpg */,
 				233990BA1823300800207BF6 /* homepage_large.40f96c91.jpg */,
 				233990BB1823300800207BF6 /* homepage_large.94dc2495.jpg */,
 				233990BD1823300800207BF6 /* leveragemodels.jpg */,
-				239D3E4318541FC900FE6FD9 /* logo.png */,
 				233990C41823308200207BF6 /* paul-mccartney-new-album.jpg */,
+				23CC0824184D3E07008C45F4 /* Dismemberment Plan.png */,
+				239D3E4318541FC900FE6FD9 /* logo.png */,
 				239D3E411853FF8500FE6FD9 /* The_New_York_Times.png */,
 			);
 			name = Images;
@@ -359,6 +362,7 @@
 				239D3E4418541FC900FE6FD9 /* logo.png in Resources */,
 				233990BF1823300800207BF6 /* homepage_large.18db360b.jpg in Resources */,
 				2308E2DB185292DC007D706F /* Default-568h@2x.png in Resources */,
+				239F1BAE185502B30003CA74 /* backButton.png in Resources */,
 				233990C51823308200207BF6 /* paul-mccartney-new-album.jpg in Resources */,
 				23CC0825184D3E07008C45F4 /* Dismemberment Plan.png in Resources */,
 				2339908F18230F1000207BF6 /* Images.xcassets in Resources */,
