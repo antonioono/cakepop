@@ -8,14 +8,17 @@
 
 #import <UIKit/UIKit.h>
 
+#import "Article.h"
+#import "ArticleView.h"
+
 @interface ArticleCollectionViewCell : UICollectionViewCell
 
 @property (nonatomic, assign) NSInteger cellNumber;
-@property (nonatomic, strong) NSString* imageNameUnread;
-@property (nonatomic, strong) NSString* imageNameRead;
-@property (nonatomic, strong) UIImageView* imageView;
 
+@property (nonatomic, strong) Article* article;
+@property (nonatomic, strong) ArticleView* articleView;
+
+- (void)setArticle:(Article *)article;
 - (void)setNumber:(NSInteger)number;
-- (void)setImageUnread:(NSString*)imageNameUnread imageNameRead:(NSString*)imageNameRead isRead:(BOOL)isRead;
 
 @end

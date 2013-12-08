@@ -96,10 +96,16 @@
 {
     ArticleCollectionViewCell *cell = (ArticleCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleCell" forIndexPath:indexPath];
 
-    Publisher* currentPublisher = self.publisherArray[indexPath.item];
+    //Article* currentArticle = self.articleArray[indexPath.item];
     
     [cell setNumber:indexPath.item];
-    [cell setImageUnread:currentPublisher.imageNameUnread imageNameRead:currentPublisher.imageNameRead isRead:currentPublisher.isRead];
+    NSString* article1TitleText = @"Article one title";
+    NSString* article1BodyText = @"Article one body text: Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! END OF TEXT";
+    NSString* article1ImageName = @"Dismemberment Plan.png";
+    NSString* article1AuthorName = @"Author1 name";
+    NSString* article1URI = @"www.article1.com";
+    Article* article1 = [[Article alloc] initWithTitleText:article1TitleText bodyText:article1BodyText imageName:article1ImageName authorName:article1AuthorName uri:article1URI];
+    [cell setArticle:article1];
     
     return cell;
 }
@@ -125,7 +131,6 @@
                              }
                              
                              if (currentCell.cellNumber == _currentSelectedCellNumber) {
-                                 NSLog(@"ZINDEX IS: %f", currentCell.layer.zPosition);
                                  _originalXPosition = currentCell.frame.origin.y;
                                  CGRect frame = currentCell.frame;
                                  frame.origin.y = self.collectionView.frame.origin.y + self.collectionView.contentOffset.y;
