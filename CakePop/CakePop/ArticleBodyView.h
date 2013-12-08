@@ -1,8 +1,8 @@
 //
-//  ArticleListCell.h
+//  ArticleBodyView.h
 //  CakePop
 //
-//  Created by Christina Yoon on 10/31/13.
+//  Created by Christina Yoon on 12/8/13.
 //  Copyright (c) 2013 Yolo. All rights reserved.
 //
 
@@ -10,7 +10,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ArticleView : UIView
+@interface ArticleBodyView : UIScrollView
 
 @property (nonatomic, strong) Article* article;
 

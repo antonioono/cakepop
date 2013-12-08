@@ -14,6 +14,7 @@
 @property (nonatomic, strong) NSString* imageNameUnread;
 @property (nonatomic, strong) NSString* imageNameRead;
 @property (nonatomic, assign) BOOL isRead;
+@property (nonatomic, assign) NSArray* articles;
 
 - (id)initWithImageNameUnread:(NSString *)imageNameUnread imageNameRead:(NSString *)imageNameRead;
 - (id)initWithImageNameUnread:(NSString *)imageNameUnread imageNameRead:(NSString *)imageNameRead headerLogoImage:(NSString *)headerLogoImage;

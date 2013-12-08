@@ -1,5 +1,5 @@
 //
-//  ArticleListCell.h
+//  ArticleView.m
 //  CakePop
 //
 //  Created by Christina Yoon on 10/31/13.
@@ -7,15 +7,14 @@
 //
 
 #import "Article.h"
+#import "ArticleBodyView.h"
 
 #import "ArticleView.h"
 
 @interface ArticleView() {
 @private
     UIImageView* coverPhoto;
-    UILabel* titleLabel;
-    UILabel* authorLabel;
-    UITextView* bodyTextView;
+    ArticleBodyView* bodyView;
     CGFloat textHeight;
 }
 @end
@@ -52,16 +51,21 @@
         UIImage* image = [UIImage imageNamed:article.imageName];
         coverPhoto = [[UIImageView alloc] initWithImage:image];
         [self addSubview:coverPhoto];
-
-        // Create body text
-        bodyTextView = [[UITextView alloc] initWithFrame:frame];
+        
+        CGFloat heightOfSubviewsBesidesBodyText = 450;
+        // TODO: This is kinda hacky, it works but will fix if I have time
+        UITextView* bodyTextView = [[UITextView alloc] initWithFrame:[UIScreen mainScreen].applicationFrame];
         bodyTextView.scrollEnabled = NO;
         bodyTextView.editable = NO;
         bodyTextView.font = [UIFont fontWithName:@"Helvetica" size:12];
-        bodyTextView.text = _article.bodyText;
-        bodyTextView.backgroundColor = [UIColor clearColor];
+        bodyTextView.text = article.bodyText;
+        CGSize textViewSize = [bodyTextView sizeThatFits:CGSizeMake(bodyTextView.frame.size.width, FLT_MAX)];
         
-        [self addSubview:bodyTextView];
+        bodyView = [[ArticleBodyView alloc] initWithFrame:self.frame article:article];
+        bodyView.pagingEnabled = YES;
+        bodyView.contentSize = CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, heightOfSubviewsBesidesBodyText + textViewSize.height);
+        [self addSubview:bodyView];
+        [self bringSubviewToFront:bodyView];
     }
     return self;
 }
@@ -71,7 +75,7 @@
     [super layoutSubviews];
 
     // Subview heights
-    NSInteger coverPhotoHeight = 400;
+    NSInteger coverPhotoHeight = 450;
     NSInteger titleLabelHeight = 100;
     NSInteger authorLabelHeight = 100;
     
@@ -94,9 +98,12 @@
     // AuthorLabel frame
     authorLabel.frame = CGRectMake(authorTextSidePadding, authorHeightOrigin, self.frame.size.width - (authorTextSidePadding * 2), authorLabelHeight);
     
+    bodyView.frame = self.frame;
     // Body Text frame
+    /*
     CGSize textViewSize = [bodyTextView sizeThatFits:CGSizeMake(bodyTextView.frame.size.width, FLT_MAX)];
     bodyTextView.frame = CGRectMake(bodyTextSidePadding, bodyTextHeightOrigin, self.frame.size.width - (bodyTextSidePadding * 2), textViewSize.height);
+     */
 }
 
 @end

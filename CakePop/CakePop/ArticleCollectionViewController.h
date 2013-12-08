@@ -8,10 +8,13 @@
 
 @class Publisher;
 
+#import "ArticleCollectionViewHeader.h"
+#import "PublisherCollectionViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface ArticleCollectionViewController : UICollectionViewController
+@interface ArticleCollectionViewController : UICollectionViewController<ArticleCollectionViewHeaderDelegate>
 
+@property(nonatomic, strong) PublisherCollectionViewController* parentCollectionViewController;
 @property(nonatomic, strong) Publisher* publisher;
 
 - (void)transitionBack;

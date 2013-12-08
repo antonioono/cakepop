@@ -54,7 +54,6 @@
     
     [_collectionViewController transitionBack];
     
-    [UIView commitAnimations];
     _collectionViewController = nil;
 }
 

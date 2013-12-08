@@ -6,8 +6,10 @@
 //  Copyright (c) 2013 Yolo. All rights reserved.
 //
 
+#import "Article.h"
 #import "ArticleCollectionViewCell.h"
 #import "ArticleCollectionViewHeader.h"
+#import "ArticleViewController.h"
 
 #import "Publisher.h"
 
@@ -19,6 +21,7 @@
 
 @property (nonatomic, assign) NSInteger currentSelectedCellNumber;
 @property (nonatomic, assign) CGFloat originalXPosition;
+@property (nonatomic, strong) NSMutableArray* articleArray;
 @property (nonatomic, strong) NSMutableArray* publisherArray;
 @property (nonatomic, strong) NSArray* visibleCells;
 
@@ -51,7 +54,8 @@
 
     if (kind == UICollectionElementKindSectionHeader) {
         ArticleCollectionViewHeader *collectionHeader = [self.collectionView dequeueReusableSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"HeaderView" forIndexPath:indexPath];
-
+        collectionHeader.delegate = self;
+        
         [collectionHeader setHeaderImageName:_publisher.headerLogoImage];
         
         reusableView = collectionHeader;
@@ -105,7 +109,7 @@
 - (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
     NSLog(@"selected image: %d", indexPath.item);
     _currentSelectedCellNumber = indexPath.item;
-    /*
+
     NSArray* visibleCells = self.collectionView.visibleCells;
     _visibleCells = visibleCells;
     [UIView animateWithDuration:1.0
@@ -116,42 +120,56 @@
                              ArticleCollectionViewCell* currentCell = visibleCells[i];
                              if (currentCell.cellNumber < _currentSelectedCellNumber) {
                                  CGRect frame = currentCell.frame;
-                                 frame.origin.x = frame.origin.x - 300;
+                                 frame.origin.y = frame.origin.y - 500;
                                  currentCell.frame = frame;
                              }
                              
                              if (currentCell.cellNumber == _currentSelectedCellNumber) {
-                                 _originalXPosition = currentCell.frame.origin.x;
+                                 NSLog(@"ZINDEX IS: %f", currentCell.layer.zPosition);
+                                 _originalXPosition = currentCell.frame.origin.y;
                                  CGRect frame = currentCell.frame;
-                                 frame.origin.x = self.collectionView.frame.origin.x + self.collectionView.contentOffset.x;
+                                 frame.origin.y = self.collectionView.frame.origin.y + self.collectionView.contentOffset.y;
                                  currentCell.frame = frame;
                              }
                              
                              if (currentCell.cellNumber > _currentSelectedCellNumber) {
                                  CGRect frame = currentCell.frame;
-                                 frame.origin.x = frame.origin.x + 300;
+                                 frame.origin.y = frame.origin.y + 500;
                                  currentCell.frame = frame;
                              }
                          }
                      }
 
                      completion:^(BOOL finished){
-                         
-                         ArticleListViewController* articleListViewController = [[ArticleListViewController alloc] init];
-                         articleListViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                         articleListViewController.collectionViewController = self;
+                         //Article* article = articleArray[_currentSelectedCellNumber];
+                         NSString* article1TitleText = @"Article one title";
+                         NSString* article1BodyText = @"Article one body text: Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! END OF TEXT";
+                         NSString* article1ImageName = @"Dismemberment Plan.png";
+                         NSString* article1AuthorName = @"Author1 name";
+                         NSString* article1URI = @"www.article1.com";
+                         Article* article1 = [[Article alloc] initWithTitleText:article1TitleText bodyText:article1BodyText imageName:article1ImageName authorName:article1AuthorName uri:article1URI];
+
+                         ArticleViewController* articleViewController = [[ArticleViewController alloc] initWithArticle:article1];
+                         articleViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+                         articleViewController.parentCollectionViewController = self;
                          
                          [self.publisherArray[indexPath.item] setIsRead:YES];
-                         [self presentViewController:articleListViewController animated:YES completion:nil];
+                         [self presentViewController:articleViewController animated:NO completion:nil];
                          //[self.navigationController pushViewController:articleListViewController animated:YES];
                          
                      }];
-          */
 }
 
-- (void)transitionBack {
-    self.navigationController.navigationBarHidden = YES;
+- (void)backPressed {
+    NSLog(@"In back pressed of delegate what up!");
     
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    [_parentCollectionViewController transitionBack];
+    _parentCollectionViewController = nil;
+}
+/*
+- (void)transitionBack {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:1.0];
     [UIView setAnimationDelay:0.0];
@@ -179,27 +197,7 @@
     
     [UIView commitAnimations];
 }
-/*
- - (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView {
- NSLog(@"scrollViewDidEndDecelerating...");
- [self printCurrentCard];
- }
- 
- - (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate {
- if (!decelerate){
- NSLog(@"scrollViewDidEndDragging...");
- [self printCurrentCard];
- }
- }
- 
- - (void)printCurrentCard{
- NSArray * visibleCards = self.collectionView.visibleCells;
- [visibleCards enumerateObjectsUsingBlock:^(PublisherCollectionViewCell * visibleCell, NSUInteger idx, BOOL *stop) {
- NSLog(@"visible cell: %@", visibleCell.imageNameUnread);
- }];
- }
- */
-
+*/
 
 - (void) initImages {
     self.publisherArray = [NSMutableArray array];

@@ -18,6 +18,8 @@
 
 @end
 
+#define IMAGE_WIDTH 50
+
 @implementation ArticleCollectionViewHeader
 
 - (id)initWithFrame:(CGRect)frame
@@ -26,11 +28,13 @@
     if (self) {
         [self setBackgroundColor:[UIColor blackColor]];
         
+        //This is done so that the first cell of the collectionview can overlay the header during the animation
+        self.layer.zPosition = -0.5;
+        
         _logoImageView = [[UIImageView alloc] init];
         [self addSubview:_logoImageView];
         
         _backButton = [[UIButton alloc] init];
-        [_backButton setBackgroundColor:[UIColor whiteColor]];
         [_backButton addTarget:self
                    action:@selector(backPressed) forControlEvents:UIControlEventTouchDown];
         UIImage* backButtonImage = [UIImage imageNamed:@"backButton.png"];
@@ -60,7 +64,7 @@
     CGRect logoImageViewFrame = CGRectMake(mainScreenWidth / 3, self.frame.size.height / 3, mainScreenWidth / 3, self.frame.size.height / 3);
     _logoImageView.frame = logoImageViewFrame;
     
-    CGRect backButtonFrame = CGRectMake(self.frame.origin.x, self.frame.size.height / 3, mainScreenWidth / 3, self.frame.size. height / 3);
+    CGRect backButtonFrame = CGRectMake(self.frame.origin.x, self.frame.size.height / 3, IMAGE_WIDTH, self.frame.size. height / 3);
     _backButton.frame = backButtonFrame;
 }
 

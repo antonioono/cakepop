@@ -117,29 +117,19 @@
                          }
                      }
                      completion:^(BOOL finished){
-                         /*
-                         ArticleListViewController* articleListViewController = [[ArticleListViewController alloc] init];
-                         articleListViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
-                         articleListViewController.collectionViewController = self;
-                         
-                         [self.publisherArray[indexPath.item] setIsRead:YES];
-                         [self presentViewController:articleListViewController animated:YES completion:nil];
-                          */
-                         //[self.navigationController pushViewController:articleListViewController animated:YES];
-                         
                          ArticleCollectionViewLayout * collectionViewLayout = [[ArticleCollectionViewLayout alloc] init];
 
                          ArticleCollectionViewController* articleCollectionViewController = [[ArticleCollectionViewController alloc] initWithCollectionViewLayout:collectionViewLayout];
+                         articleCollectionViewController.parentCollectionViewController = self;
+                         
                          articleCollectionViewController.publisher = _publisherArray[_currentSelectedCellNumber];
                          [self presentViewController:articleCollectionViewController animated:YES completion:nil];
                      }];
 }
 
 - (void)transitionBack {
-    self.navigationController.navigationBarHidden = YES;
-    
     [UIView beginAnimations:nil context:nil];
-    [UIView setAnimationDuration:1.0];
+    [UIView setAnimationDuration:1.5];
     [UIView setAnimationDelay:0.0];
     [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
     for (int i = 0; i < [_visibleCells count]; i++) {
