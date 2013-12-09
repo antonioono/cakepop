@@ -9,6 +9,7 @@
 #import "ArticleCollectionViewLayout.h"
 
 #define ADJUSTMENT 33.33
+#define OVERLAP 200
 
 @implementation ArticleCollectionViewLayout
 
@@ -48,7 +49,7 @@
         {
             transform = CATransform3DTranslate(transform, 0, 0, 0);
         } else {
-            transform = CATransform3DTranslate(transform, -(overlap * layoutAttributes.indexPath.item), 200 * layoutAttributes.indexPath.item, 0);
+            transform = CATransform3DTranslate(transform, -(overlap * layoutAttributes.indexPath.item), OVERLAP * layoutAttributes.indexPath.item, 0);
         }
         layoutAttributes.transform3D = transform;
         
@@ -61,20 +62,18 @@
     return modifiedLayoutAttributesArray;
 }
 
-/*
- * Kind of weird bug here caused by this or the method above it, but with 10 publishers this looks good. (Will explore if I have time)
- */
 - (CGSize)collectionViewContentSize
 {
     NSInteger numCells = [self.collectionView numberOfItemsInSection:0];
-    NSInteger overlap = [UIScreen mainScreen].bounds.size.width + self.minimumInteritemSpacing;
+    NSInteger overlap = 200 * (numCells - 1);
     
     NSInteger numOverlappedPixels = ([UIScreen mainScreen].applicationFrame.size.width - overlap) * (numCells - 1);
-    NSInteger numFilledSpaceWithoutOverlap = ([UIScreen mainScreen].applicationFrame.size.width) * numCells + (-1 * (numCells - 1));
+    NSInteger numFilledSpaceWithoutOverlap = ([UIScreen mainScreen].applicationFrame.size.height + self.minimumInteritemSpacing) * numCells;
     
-    NSLog(@"Numcells: %d | Overlap: %d | filled Space: %d | difference: %d", numCells, numOverlappedPixels, numFilledSpaceWithoutOverlap, numFilledSpaceWithoutOverlap - numOverlappedPixels);
+    NSLog(@"Difference is: %f", ([UIScreen mainScreen].applicationFrame.size.height - OVERLAP));
+    NSLog(@"Numcells: %d | Overlap: %d | filled Space: %d | difference: %f", numCells, numOverlappedPixels, numFilledSpaceWithoutOverlap, ([UIScreen mainScreen].applicationFrame.size.height - OVERLAP) * numCells);
     
-    return CGSizeMake(self.collectionView.frame.size.width, numFilledSpaceWithoutOverlap - numOverlappedPixels);
+    return CGSizeMake(self.collectionView.frame.size.width, (426) * numCells);
 }
 
 @end

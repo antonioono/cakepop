@@ -10,8 +10,9 @@
 
 #import <UIKit/UIKit.h>
 #import "ArticleCollectionViewController.h"
+#import "ArticleView.h"
 
-@interface ArticleViewController : UIViewController <UIGestureRecognizerDelegate>
+@interface ArticleViewController : UIViewController <ArticleViewDelegate>
 
 @property(nonatomic, strong) Article* article;
 @property(nonatomic, strong) ArticleCollectionViewController* parentCollectionViewController;

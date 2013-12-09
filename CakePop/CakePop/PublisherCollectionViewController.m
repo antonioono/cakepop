@@ -8,12 +8,14 @@
 //  Copyright (c) 2013 Yolo. All rights reserved.
 //
 
+#import "Article.h"
 #import "ArticleCollectionViewController.h"
 #import "ArticleCollectionViewLayout.h"
 #import "ArticleListViewController.h"
 #import "Publisher.h"
 #import "PublisherCollectionViewCell.h"
 #import "PublisherCollectionViewLayout.h"
+#import "SettingsView.h"
 
 #import "PublisherCollectionViewController.h"
 
@@ -23,6 +25,8 @@
 @property (nonatomic, assign) CGFloat originalXPosition;
 @property (nonatomic, strong) NSMutableArray* publisherArray;
 @property (nonatomic, strong) NSArray* visibleCells;
+@property (nonatomic, strong) SettingsView* settingsView;
+@property (nonatomic, assign) BOOL settingsPageShowing;
 
 @end
 
@@ -32,7 +36,19 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initImages];
+    [self initPublisherAndArticles];
+    
+    UISwipeGestureRecognizer *swipeDown = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    UISwipeGestureRecognizer *swipeUp = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleSwipe:)];
+    [swipeDown setDirection:UISwipeGestureRecognizerDirectionDown];
+    [swipeUp setDirection:UISwipeGestureRecognizerDirectionUp];
+    // Adding the swipe gesture on image view
+    [self.view addGestureRecognizer:swipeDown];
+    [self.view addGestureRecognizer:swipeUp];
+    
+    CGRect settingsFrame = CGRectMake(0, -[UIScreen mainScreen].applicationFrame.size.height, [UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height);
+    self.settingsView = [[SettingsView alloc]initWithFrame:settingsFrame];
+    [self.view addSubview:self.settingsView];
     
     self.navigationController.navigationBarHidden = NO;
     self.collectionView.frame = CGRectMake(0, 0, 2000, [UIScreen mainScreen].applicationFrame.size.height);
@@ -46,8 +62,36 @@
     self.collectionView.backgroundColor = [UIColor clearColor];
 }
 
-#pragma mark - Status bar stuff
+#pragma mark - Gesture Recognizer
+- (void)handleSwipe:(UISwipeGestureRecognizer *)swipe {
+    
+    if (swipe.direction == UISwipeGestureRecognizerDirectionDown && _settingsPageShowing == NO) {
+        NSLog(@"Down Swipe");
+        _settingsPageShowing = YES;
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:1.0];
+        [UIView setAnimationDelay:0.0];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        CGRect transitionToFrame = CGRectMake(0, 15, [UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height);
+        self.settingsView.frame = transitionToFrame;
+        [UIView commitAnimations];
+    } else if (swipe.direction == UISwipeGestureRecognizerDirectionUp && _settingsPageShowing == YES) {
+        NSLog(@"Up Swipe");
+        _settingsPageShowing = NO;
+        
+        [UIView beginAnimations:nil context:nil];
+        [UIView setAnimationDuration:1.0];
+        [UIView setAnimationDelay:0.0];
+        [UIView setAnimationCurve:UIViewAnimationCurveEaseOut];
+        CGRect transitionToFrame = CGRectMake(0, -[UIScreen mainScreen].applicationFrame.size.height, [UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height);
+        self.settingsView.frame = transitionToFrame;
+        [UIView commitAnimations];
 
+    }
+}
+
+#pragma mark - Status bar stuff
 - (BOOL)prefersStatusBarHidden {
     return NO;
 }
@@ -176,10 +220,31 @@
 }
  */
 
+/*
+ * Initializes one sample article
+ */
+- (Article *)createOneSampleArticle {
+    NSString* articleTitleText = @"Article Title Here!";
+    NSString* articleBodyText = @"Article one body text: Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! END OF TEXT";
+    NSString* articleImageName = @"Dismemberment Plan.png";
+    NSString* articleAuthorName = @"Author name";
+    NSString* articleURI = @"www.article.com";
+    
+    Article* article = [[Article alloc] initWithTitleText:articleTitleText bodyText:articleBodyText imageName:articleImageName authorName:articleAuthorName uri:articleURI];
+    
+    return article;
+}
 
-- (void) initImages {
+
+/*
+ * Initializes Publishers and articles
+ *
+ * Works best if you have 10 publishers + 10 articles for each publisher (there are subtle layout bugs otherwise that I don't have time to dive into)
+ */
+- (void) initPublisherAndArticles {
     self.publisherArray = [NSMutableArray array];
     
+    //Create 10 same publishers
     Publisher* publisher1 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"logo.png"];
     Publisher* publisher2 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"logo.png"];
     Publisher* publisher3 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png" headerLogoImage:@"logo.png"];
@@ -201,6 +266,24 @@
     [self.publisherArray addObject:publisher8];
     [self.publisherArray addObject:publisher9];
     [self.publisherArray addObject:publisher10];
+    
+    //Add the same article 10 times for ea publisher
+    for (int i = 0; i < [self.publisherArray count]; i++)
+    {
+        Publisher* currentPublisher = self.publisherArray[i];
+
+        NSMutableArray* mutableArticleArray = [[NSMutableArray alloc] init];
+        for(int i = 0; i < 10; i++)
+        {
+            Article* article = [self createOneSampleArticle];
+            NSLog(@"%@", article.bodyText);
+            [mutableArticleArray addObject:[self createOneSampleArticle]];
+        }
+        NSArray* articleArray = [NSArray arrayWithArray:mutableArticleArray];
+        currentPublisher.articles = articleArray;
+        //currentPublisher.articles = [[NSMutableArray alloc] initWithArray:articleArray copyItems:YES];
+
+    }
 }
 
 @end

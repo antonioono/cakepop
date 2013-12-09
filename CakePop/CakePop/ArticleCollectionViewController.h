@@ -12,7 +12,7 @@
 #import "PublisherCollectionViewController.h"
 #import <UIKit/UIKit.h>
 
-@interface ArticleCollectionViewController : UICollectionViewController<ArticleCollectionViewHeaderDelegate>
+@interface ArticleCollectionViewController : UICollectionViewController <ArticleCollectionViewHeaderDelegate>
 
 @property(nonatomic, strong) PublisherCollectionViewController* parentCollectionViewController;
 @property(nonatomic, strong) Publisher* publisher;

@@ -10,9 +10,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ArticleView : UIView
+#import "ArticleBodyView.h"
+
+@protocol ArticleViewDelegate <NSObject>
+@required
+- (void) backPressed;
+@end
+
+@interface ArticleView : UIView <ArticleBodyViewDelegate>
 
 @property (nonatomic, strong) Article* article;
+
+@property(nonatomic, strong) id<ArticleViewDelegate> delegate;
 
 - (id)initWithFrame:(CGRect)frame article:(Article *)article;
 

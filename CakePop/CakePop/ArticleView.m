@@ -11,35 +11,17 @@
 
 #import "ArticleView.h"
 
+#define IMAGE_DIMENSION 50
+
 @interface ArticleView() {
 @private
     UIImageView* coverPhoto;
     ArticleBodyView* bodyView;
+    UIImageView* backButton;
 }
 @end
 
 @implementation ArticleView
-
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        _article = nil;
-        
-        self.backgroundColor = [UIColor whiteColor];
-        // Create image view (used at the top)
-        coverPhoto = [[UIImageView alloc] init];
-        coverPhoto.layer.zPosition = -5;
-        [self addSubview:coverPhoto];
-        
-        bodyView = [[ArticleBodyView alloc] initWithFrame:self.frame];
-        bodyView.contentSize = CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height);
-        bodyView.pagingEnabled = NO;
-        [self addSubview:bodyView];
-        [self bringSubviewToFront:bodyView];
-    }
-    return self;
-}
 
 - (id)initWithFrame:(CGRect)frame article:(Article *)article
 {
@@ -62,7 +44,12 @@
         bodyTextView.text = article.bodyText;
         CGSize textViewSize = [bodyTextView sizeThatFits:CGSizeMake(bodyTextView.frame.size.width, FLT_MAX)];
         
+        UIImage* backButtonImage = [UIImage imageNamed:@"backButton.png"];
+        backButton = [[UIImageView alloc] initWithImage:backButtonImage];
+        [self addSubview:backButton];
+        
         bodyView = [[ArticleBodyView alloc] initWithFrame:self.frame article:article];
+        bodyView.backPressedDelegate = self;
         bodyView.pagingEnabled = NO;
         bodyView.contentSize = CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, heightOfSubviewsBesidesBodyText + textViewSize.height);
         [self addSubview:bodyView];
@@ -71,23 +58,22 @@
     return self;
 }
 
-- (void)setArticle:(Article *)article
+- (void)backPressed
 {
-    _article = article;
-    UIImage* image = [UIImage imageNamed:article.imageName];
-    [coverPhoto setImage:image];
-    [bodyView setArticle:article];
+    [_delegate backPressed];
 }
-
 
 - (void)layoutSubviews {
     [super layoutSubviews];
 
     // Subview heights
     NSInteger coverPhotoHeight = 500;
+    
+    NSInteger backButtonSidePadding = 5;
 
     // Coverphoto frame
     coverPhoto.frame = CGRectMake(0,0, self.frame.size.width, coverPhotoHeight);
+    backButton.frame = CGRectMake(backButtonSidePadding,20, IMAGE_DIMENSION, IMAGE_DIMENSION);
 }
 
 @end

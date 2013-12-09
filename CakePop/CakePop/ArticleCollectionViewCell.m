@@ -14,8 +14,6 @@
 @interface ArticleCollectionViewCell() {
 @private
     UIImageView* coverPhoto;
-    UITextView* titleTextView;
-    UILabel* authorLabel;
     UITextView* bodyTextView;
 }
 @end
@@ -26,8 +24,6 @@
 {
     self = [super initWithFrame:frame];
     if (self) {
-        NSLog(@"FRAME ORIGINSSS IN CELL: %f, %f", frame.origin.x, frame.origin.y);
-
         _article = nil;
         
         self.backgroundColor = [UIColor whiteColor];
@@ -35,25 +31,31 @@
         coverPhoto = [[UIImageView alloc] init];
         [self addSubview:coverPhoto];
     
-        titleTextView = [[UITextView alloc] init];
-        titleTextView.scrollEnabled = NO;
-        titleTextView.editable = NO;
-        titleTextView.userInteractionEnabled = NO;
-        titleTextView.font = [UIFont fontWithName:@"Helvetica" size:48];
-        titleTextView.text = _article.titleText;
-        titleTextView.textColor = [UIColor whiteColor];
-        titleTextView.backgroundColor = [UIColor clearColor];
-        [self addSubview:titleTextView];
+        _titleTextView = [[UITextView alloc] init];
+        _titleTextView.scrollEnabled = NO;
+        _titleTextView.editable = NO;
+        _titleTextView.userInteractionEnabled = NO;
+        _titleTextView.font = [UIFont fontWithName:@"Helvetica" size:48];
+        _titleTextView.text = _article.titleText;
+        _titleTextView.textColor = [UIColor whiteColor];
+        _titleTextView.backgroundColor = [UIColor clearColor];
+        [self addSubview:_titleTextView];
         
         // Create author label
-        authorLabel = [[UILabel alloc] init];
-        authorLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        authorLabel.numberOfLines = 1;
-        authorLabel.alpha = 1.0;
-        authorLabel.textColor = [UIColor whiteColor];
-        authorLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
-        authorLabel.text = _article.authorName;
-        [self addSubview:authorLabel];
+        _authorLabel = [[UILabel alloc] init];
+        _authorLabel.lineBreakMode = NSLineBreakByWordWrapping;
+        _authorLabel.numberOfLines = 1;
+        _authorLabel.alpha = 1.0;
+        _authorLabel.textColor = [UIColor whiteColor];
+        _authorLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
+        _authorLabel.text = _article.authorName;
+        [self addSubview:_authorLabel];
+        
+        // Back button image
+        UIImage* backButtonImage = [UIImage imageNamed:@"backButton.png"];
+        _backButton = [[UIImageView alloc]initWithImage:backButtonImage];
+        _backButton.hidden = YES;
+        [self addSubview:_backButton];
         
         // Create body text
         bodyTextView = [[UITextView alloc] init];
@@ -74,8 +76,8 @@
     UIImage* image = [UIImage imageNamed:_article.imageName];
     [coverPhoto setImage:image];
     
-    titleTextView.text = _article.titleText;
-    authorLabel.text = _article.authorName;
+    _titleTextView.text = _article.titleText;
+    _authorLabel.text = _article.authorName;
     bodyTextView.text = _article.bodyText;
     
     [self setNeedsDisplay];
@@ -98,25 +100,32 @@
     // Subview heights
     NSInteger titleLabelHeight = 300;
     NSInteger authorLabelHeight = 100;
+    NSInteger backButtonWidth = 50;
+    NSInteger backButtonHeight = 50;
     
     // Subview origins
     NSInteger titleHeightOrigin = 20;
     NSInteger authorHeightOrigin = 120;
     NSInteger bodyTextHeightOrigin = 520;
+    NSInteger backButtonHeightOrigin = 20;
     
     // Subview padding
     NSInteger titleTextSidePadding = 5;
     NSInteger authorTextSidePadding = 10;
     NSInteger bodyTextSidePadding = 0;
+    NSInteger backButtonWidthOrigin = -60;
     
     // TitleTextView frame
-    titleTextView.frame = CGRectMake(titleTextSidePadding, titleHeightOrigin, self.frame.size.width - (titleTextSidePadding * 2), titleLabelHeight);
+    _titleTextView.frame = CGRectMake(titleTextSidePadding, titleHeightOrigin, self.frame.size.width - (titleTextSidePadding * 2), titleLabelHeight);
     
     // AuthorLabel frame
-    authorLabel.frame = CGRectMake(authorTextSidePadding, authorHeightOrigin, self.frame.size.width - (authorTextSidePadding * 2), authorLabelHeight);
+    _authorLabel.frame = CGRectMake(authorTextSidePadding, authorHeightOrigin, self.frame.size.width - (authorTextSidePadding * 2), authorLabelHeight);
     
     // Body Text frame
     bodyTextView.frame = CGRectMake(bodyTextSidePadding, bodyTextHeightOrigin, self.frame.size.width - (bodyTextSidePadding * 2), self.frame.size.height + 50 - bodyTextHeightOrigin);
+    
+    // Back Button frame
+    _backButton.frame = CGRectMake(backButtonWidthOrigin, backButtonHeightOrigin, backButtonWidth, backButtonHeight);
 }
 
 - (void)prepareForReuse {

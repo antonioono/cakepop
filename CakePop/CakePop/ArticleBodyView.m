@@ -10,63 +10,23 @@
 
 #import "ArticleBodyView.h"
 
-#define CELL_OFFSET 100
+#define IMAGE_DIMENSION 50
 
 @interface ArticleBodyView() {
 @private
     UITextView* titleTextView;
     UILabel* authorLabel;
     UITextView* bodyTextView;
-    BOOL usingCell;
+    UIButton* backButton;
 }
 @end
 
 @implementation ArticleBodyView
 
-- (id)initWithFrame:(CGRect)frame
-{
-    self = [super initWithFrame:frame];
-    if (self) {
-        NSLog(@"FRAME ORIGINSSS: %f, %f", frame.origin.x, frame.origin.y);
-
-        usingCell = YES;
-        self.backgroundColor = [UIColor clearColor];
-        _article = nil;
-        
-        titleTextView = [[UITextView alloc] init];
-        titleTextView.scrollEnabled = NO;
-        titleTextView.editable = NO;
-        titleTextView.font = [UIFont fontWithName:@"Helvetica" size:48];
-        titleTextView.textColor = [UIColor whiteColor];
-        titleTextView.backgroundColor = [UIColor clearColor];
-        titleTextView.layer.zPosition = 100;
-        [self addSubview:titleTextView];
-        
-        // Create author label
-        authorLabel = [[UILabel alloc] init];
-        authorLabel.lineBreakMode = NSLineBreakByWordWrapping;
-        authorLabel.numberOfLines = 1;
-        authorLabel.textColor = [UIColor whiteColor];
-        authorLabel.font = [UIFont fontWithName:@"Helvetica" size:25];
-        [self addSubview:authorLabel];
-        
-        // Create body text
-        bodyTextView = [[UITextView alloc] initWithFrame:frame];
-        bodyTextView.scrollEnabled = NO;
-        bodyTextView.editable = NO;
-        bodyTextView.font = [UIFont fontWithName:@"Arial" size:12];
-        bodyTextView.backgroundColor = [UIColor whiteColor];
-        
-        [self addSubview:bodyTextView];
-    }
-    return self;
-}
-
 - (id)initWithFrame:(CGRect)frame article:(Article *)article
 {
     self = [super initWithFrame:frame];
     if (self) {
-        usingCell = NO;
         self.backgroundColor = [UIColor clearColor];
         _article = article;
         
@@ -97,20 +57,19 @@
         bodyTextView.text = _article.bodyText;
         bodyTextView.backgroundColor = [UIColor whiteColor];
         
+        //Create transparent back button
+        backButton = [[UIButton alloc] init];
+        [backButton addTarget:self
+                       action:@selector(backPressed) forControlEvents:UIControlEventTouchDown];
+        [self addSubview:backButton];
+        
         [self addSubview:bodyTextView];
     }
     return self;
 }
 
-- (void)setArticle:(Article *)article
-{
-    _article = article;
-    titleTextView.text = _article.titleText;
-    authorLabel.text = _article.authorName;
-    bodyTextView.text = _article.bodyText;
-    
-    [self setNeedsDisplay];
-    [self.superview setNeedsDisplay];
+- (void)backPressed {
+    [_backPressedDelegate backPressed];
 }
 
 - (void)layoutSubviews {
@@ -124,11 +83,13 @@
     NSInteger titleHeightOrigin = 300;
     NSInteger authorHeightOrigin = 400;
     NSInteger bodyTextHeightOrigin = 500;
+    NSInteger backButtonHeightOrigin = 20;
  
     // Subview padding
     NSInteger titleTextSidePadding = 5;
     NSInteger authorTextSidePadding = 10;
     NSInteger bodyTextSidePadding = 0;
+    NSInteger backButtonSidePadding = 5;
  
     // TitleTextView frame
     titleTextView.frame = CGRectMake(titleTextSidePadding, titleHeightOrigin, self.frame.size.width - (titleTextSidePadding * 2), titleLabelHeight);
@@ -139,6 +100,9 @@
     // Body Text frame
     CGSize textViewSize = [bodyTextView sizeThatFits:CGSizeMake(bodyTextView.frame.size.width, FLT_MAX)];
     bodyTextView.frame = CGRectMake(bodyTextSidePadding, bodyTextHeightOrigin, self.frame.size.width - (bodyTextSidePadding * 2), textViewSize.height);
+    
+    // Back Button frame
+    backButton.frame = CGRectMake(backButtonSidePadding, backButtonHeightOrigin, IMAGE_DIMENSION, IMAGE_DIMENSION);
 }
 
 @end

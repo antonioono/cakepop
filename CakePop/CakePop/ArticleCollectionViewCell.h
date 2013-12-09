@@ -17,6 +17,9 @@
 
 @property (nonatomic, strong) Article* article;
 @property (nonatomic, strong) ArticleView* articleView;
+@property (nonatomic, strong) UITextView* titleTextView;
+@property (nonatomic, strong) UILabel* authorLabel;
+@property (nonatomic, strong) UIImageView* backButton;
 
 - (void)setArticle:(Article *)article;
 - (void)setNumber:(NSInteger)number;

@@ -20,19 +20,25 @@
 @interface ArticleCollectionViewController ()
 
 @property (nonatomic, assign) NSInteger currentSelectedCellNumber;
-@property (nonatomic, assign) CGFloat originalXPosition;
-@property (nonatomic, strong) NSMutableArray* articleArray;
-@property (nonatomic, strong) NSMutableArray* publisherArray;
+@property (nonatomic, assign) CGFloat originalYPosition;
+@property (nonatomic, strong) NSArray* articleArray;
 @property (nonatomic, strong) NSArray* visibleCells;
 
 @end
 
 @implementation ArticleCollectionViewController
 
+- (void)setPublisher:(Publisher *)publisher
+{
+    _publisher = publisher;
+    self.articleArray = _publisher.articles;
+
+    [self.view setNeedsDisplay];
+}
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-    [self initImages];
     
     [self.collectionView registerClass:[ArticleCollectionViewHeader class] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader
     withReuseIdentifier:@"HeaderView"];
@@ -89,23 +95,17 @@
 }
 
 - (NSInteger)collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section {
-    return [self.publisherArray count];
+    return [self.articleArray count];
 }
 
 -(UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     ArticleCollectionViewCell *cell = (ArticleCollectionViewCell *)[collectionView dequeueReusableCellWithReuseIdentifier:@"ArticleCell" forIndexPath:indexPath];
 
-    //Article* currentArticle = self.articleArray[indexPath.item];
+    Article* currentArticle = self.articleArray[indexPath.item];
     
     [cell setNumber:indexPath.item];
-    NSString* article1TitleText = @"Article one title";
-    NSString* article1BodyText = @"Article one body text: Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! END OF TEXT";
-    NSString* article1ImageName = @"Dismemberment Plan.png";
-    NSString* article1AuthorName = @"Author1 name";
-    NSString* article1URI = @"www.article1.com";
-    Article* article1 = [[Article alloc] initWithTitleText:article1TitleText bodyText:article1BodyText imageName:article1ImageName authorName:article1AuthorName uri:article1URI];
-    [cell setArticle:article1];
+    [cell setArticle:currentArticle];
     
     return cell;
 }
@@ -131,10 +131,23 @@
                              }
                              
                              if (currentCell.cellNumber == _currentSelectedCellNumber) {
-                                 _originalXPosition = currentCell.frame.origin.y;
+                                 _originalYPosition = currentCell.frame.origin.y;
                                  CGRect frame = currentCell.frame;
                                  frame.origin.y = self.collectionView.frame.origin.y + self.collectionView.contentOffset.y;
                                  currentCell.frame = frame;
+                                 
+                                 CGRect titleFrame = currentCell.titleTextView.frame;
+                                 CGRect newTitleFrame = CGRectMake(titleFrame.origin.x, titleFrame.origin.y + 300, titleFrame.size.width, titleFrame.size.height);
+                                 currentCell.titleTextView.frame = newTitleFrame;
+                                 
+                                 CGRect authorFrame = currentCell.authorLabel.frame;
+                                 CGRect newAuthorFrame = CGRectMake(authorFrame.origin.x, authorFrame.origin.y + 300, authorFrame.size.width, authorFrame.size.height);
+                                 currentCell.authorLabel.frame = newAuthorFrame;
+                                 
+                                 currentCell.backButton.hidden = NO;
+                                 CGRect backButtonFrame = currentCell.backButton.frame;
+                                 CGRect newBackButtonFrame = CGRectMake(backButtonFrame.origin.x + 65, backButtonFrame.origin.y, backButtonFrame.size.width, backButtonFrame.size.height);
+                                 currentCell.backButton.frame = newBackButtonFrame;
                              }
                              
                              if (currentCell.cellNumber > _currentSelectedCellNumber) {
@@ -146,34 +159,25 @@
                      }
 
                      completion:^(BOOL finished){
-                         //Article* article = articleArray[_currentSelectedCellNumber];
-                         NSString* article1TitleText = @"Article one title";
-                         NSString* article1BodyText = @"Article one body text: Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! Repeated words are fun! END OF TEXT";
-                         NSString* article1ImageName = @"Dismemberment Plan.png";
-                         NSString* article1AuthorName = @"Author1 name";
-                         NSString* article1URI = @"www.article1.com";
-                         Article* article1 = [[Article alloc] initWithTitleText:article1TitleText bodyText:article1BodyText imageName:article1ImageName authorName:article1AuthorName uri:article1URI];
-
-                         ArticleViewController* articleViewController = [[ArticleViewController alloc] initWithArticle:article1];
+                         Article* article = _articleArray[_currentSelectedCellNumber];
+                         
+                         ArticleViewController* articleViewController = [[ArticleViewController alloc] initWithArticle:article];
                          articleViewController.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
                          articleViewController.parentCollectionViewController = self;
                          
-                         [self.publisherArray[indexPath.item] setIsRead:YES];
                          [self presentViewController:articleViewController animated:NO completion:nil];
                          //[self.navigationController pushViewController:articleListViewController animated:YES];
                          
                      }];
 }
 
-- (void)backPressed {
-    NSLog(@"In back pressed of delegate what up!");
-    
+- (void)backPressed {    
     [self dismissViewControllerAnimated:YES completion:nil];
     
     [_parentCollectionViewController transitionBack];
     _parentCollectionViewController = nil;
 }
-/*
+
 - (void)transitionBack {
     [UIView beginAnimations:nil context:nil];
     [UIView setAnimationDuration:1.0];
@@ -183,50 +187,37 @@
         ArticleCollectionViewCell* currentCell = _visibleCells[i];
         if (currentCell.cellNumber < _currentSelectedCellNumber) {
             CGRect frame = currentCell.frame;
-            frame.origin.x = frame.origin.x + 300;
+            frame.origin.y = frame.origin.y + 500;
             currentCell.frame = frame;
         }
         
         if (currentCell.cellNumber == _currentSelectedCellNumber) {
             CGRect frame = currentCell.frame;
-            frame.origin.x = _originalXPosition;
+            frame.origin.y = _originalYPosition;
             currentCell.frame = frame;
+            
+            CGRect titleFrame = currentCell.titleTextView.frame;
+            CGRect newTitleFrame = CGRectMake(titleFrame.origin.x, titleFrame.origin.y - 300, titleFrame.size.width, titleFrame.size.height);
+            currentCell.titleTextView.frame = newTitleFrame;
+            
+            CGRect authorFrame = currentCell.authorLabel.frame;
+            CGRect newAuthorFrame = CGRectMake(authorFrame.origin.x, authorFrame.origin.y - 300, authorFrame.size.width, authorFrame.size.height);
+            currentCell.authorLabel.frame = newAuthorFrame;
+            
+            currentCell.backButton.hidden = NO;
+            CGRect backButtonFrame = currentCell.backButton.frame;
+            CGRect newBackButtonFrame = CGRectMake(backButtonFrame.origin.x - 65, backButtonFrame.origin.y, backButtonFrame.size.width, backButtonFrame.size.height);
+            currentCell.backButton.frame = newBackButtonFrame;
         }
         
         if (currentCell.cellNumber > _currentSelectedCellNumber) {
             CGRect frame = currentCell.frame;
-            frame.origin.x = frame.origin.x - 300;
+            frame.origin.y = frame.origin.y - 500;
             currentCell.frame = frame;
         }
     }
     
     [UIView commitAnimations];
 }
-*/
 
-- (void) initImages {
-    self.publisherArray = [NSMutableArray array];
-    
-    Publisher* publisher1 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher2 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher3 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher4 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher5 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher6 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher7 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher8 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher9 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    Publisher* publisher10 = [[Publisher alloc] initWithImageNameUnread:@"Dismemberment Plan.png" imageNameRead:@"Dismemberment Plan.png"];
-    
-    [self.publisherArray addObject:publisher1];
-    [self.publisherArray addObject:publisher2];
-    [self.publisherArray addObject:publisher3];
-    [self.publisherArray addObject:publisher4];
-    [self.publisherArray addObject:publisher5];
-    [self.publisherArray addObject:publisher6];
-    [self.publisherArray addObject:publisher7];
-    [self.publisherArray addObject:publisher8];
-    [self.publisherArray addObject:publisher9];
-    [self.publisherArray addObject:publisher10];
-}
 @end

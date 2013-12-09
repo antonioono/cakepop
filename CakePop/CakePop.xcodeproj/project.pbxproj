@@ -43,6 +43,7 @@
 		239D3E4418541FC900FE6FD9 /* logo.png in Resources */ = {isa = PBXBuildFile; fileRef = 239D3E4318541FC900FE6FD9 /* logo.png */; };
 		239F1BAE185502B30003CA74 /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 239F1BAD185502B30003CA74 /* backButton.png */; };
 		239F1BB0185503A40003CA74 /* backButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 239F1BAF185503A40003CA74 /* backButton.png */; };
+		23AA29121855616B002F4284 /* SettingsView.m in Sources */ = {isa = PBXBuildFile; fileRef = 23AA29111855616B002F4284 /* SettingsView.m */; };
 		23CC0825184D3E07008C45F4 /* Dismemberment Plan.png in Resources */ = {isa = PBXBuildFile; fileRef = 23CC0824184D3E07008C45F4 /* Dismemberment Plan.png */; };
 		23CC082B184D432A008C45F4 /* PublisherCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC082A184D432A008C45F4 /* PublisherCollectionViewController.m */; };
 		23CC082E184D4497008C45F4 /* PublisherCollectionViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 23CC082D184D4497008C45F4 /* PublisherCollectionViewCell.m */; };
@@ -111,6 +112,8 @@
 		239D3E4318541FC900FE6FD9 /* logo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = logo.png; sourceTree = "<group>"; };
 		239F1BAD185502B30003CA74 /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
 		239F1BAF185503A40003CA74 /* backButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = backButton.png; sourceTree = "<group>"; };
+		23AA29101855616B002F4284 /* SettingsView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SettingsView.h; sourceTree = "<group>"; };
+		23AA29111855616B002F4284 /* SettingsView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SettingsView.m; sourceTree = "<group>"; };
 		23CC0824184D3E07008C45F4 /* Dismemberment Plan.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Dismemberment Plan.png"; sourceTree = "<group>"; };
 		23CC0829184D432A008C45F4 /* PublisherCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PublisherCollectionViewController.h; sourceTree = "<group>"; };
 		23CC082A184D432A008C45F4 /* PublisherCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PublisherCollectionViewController.m; sourceTree = "<group>"; };
@@ -248,6 +251,8 @@
 				239D3E3F1853F8C400FE6FD9 /* ArticleCollectionViewHeader.m */,
 				2381672818550F1A00B93AD5 /* ArticleBodyView.h */,
 				2381672918550F1A00B93AD5 /* ArticleBodyView.m */,
+				23AA29101855616B002F4284 /* SettingsView.h */,
+				23AA29111855616B002F4284 /* SettingsView.m */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -398,6 +403,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				239D3E401853F8C400FE6FD9 /* ArticleCollectionViewHeader.m in Sources */,
+				23AA29121855616B002F4284 /* SettingsView.m in Sources */,
 				236A5CC51852AE04002CCD54 /* ArticleCollectionViewCell.m in Sources */,
 				233990B6182321FB00207BF6 /* ArticleListCell.m in Sources */,
 				233990B318231ACF00207BF6 /* Article.m in Sources */,

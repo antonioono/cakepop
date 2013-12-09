@@ -20,7 +20,6 @@
 
 @end
 
-
 @implementation ArticleViewController
 
 - (id)initWithArticle:(Article *)article
@@ -28,22 +27,24 @@
     self = [super init];
     if (self) {
         _articleView = [[ArticleView alloc]initWithFrame:[UIScreen mainScreen].applicationFrame article:article];
+        _articleView.delegate = self;
         self.view = _articleView;
     }
     return self;
 }
 
-- (void)loadView
-{
-    [super loadView];
+- (UIStatusBarStyle)preferredStatusBarStyle{
+    return UIStatusBarStyleLightContent;
 }
 
-- (void)viewDidLoad
+- (void)backPressed
 {
-    [super viewDidLoad];
- 
+    NSLog(@"In back pressed of ArticleViewController!!");
     
-    NSLog(@"View did load for %@", _article.titleText);
+    [self dismissViewControllerAnimated:NO completion:nil];
+    
+    [_parentCollectionViewController transitionBack];
+    _parentCollectionViewController = nil;
 }
 
 @end
