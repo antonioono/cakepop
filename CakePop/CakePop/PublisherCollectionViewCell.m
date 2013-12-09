@@ -26,8 +26,6 @@
         myContentView.layer.borderColor = [UIColor blackColor].CGColor;
         myContentView.layer.borderWidth = borderWidth;
         [self.contentView addSubview:myContentView];
-        
-        [self setNumber:0];
     }
     return self;
 }

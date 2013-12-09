@@ -8,7 +8,7 @@
 
 #import "ArticleCollectionViewLayout.h"
 
-#define ADJUSTMENT 33
+#define ADJUSTMENT 33.33
 
 @implementation ArticleCollectionViewLayout
 
@@ -40,7 +40,7 @@
     NSLog(@"Width of screen: %f", [UIScreen mainScreen].bounds.size.width);
     NSArray * array = [super layoutAttributesForElementsInRect:rect];
     NSMutableArray * modifiedLayoutAttributesArray = [NSMutableArray array];
-    NSInteger overlap = [UIScreen mainScreen].bounds.size.width + ADJUSTMENT;
+    CGFloat overlap = [UIScreen mainScreen].bounds.size.width + ADJUSTMENT;
     
     [array enumerateObjectsUsingBlock:^(UICollectionViewLayoutAttributes * layoutAttributes, NSUInteger idx, BOOL *stop) {
         CATransform3D transform = CATransform3DIdentity;
@@ -48,7 +48,7 @@
         {
             transform = CATransform3DTranslate(transform, 0, 0, 0);
         } else {
-            transform = CATransform3DTranslate(transform, -(overlap * layoutAttributes.indexPath.item), 100 * layoutAttributes.indexPath.item, 0);
+            transform = CATransform3DTranslate(transform, -(overlap * layoutAttributes.indexPath.item), 200 * layoutAttributes.indexPath.item, 0);
         }
         layoutAttributes.transform3D = transform;
         

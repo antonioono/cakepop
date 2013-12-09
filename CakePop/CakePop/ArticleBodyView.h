@@ -13,6 +13,8 @@
 @interface ArticleBodyView : UIScrollView
 
 @property (nonatomic, strong) Article* article;
+@property (nonatomic, assign) NSInteger cellNumber;
+
 
 - (id)initWithFrame:(CGRect)frame article:(Article *)article;
 

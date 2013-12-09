@@ -20,6 +20,27 @@
 
 @implementation ArticleView
 
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        _article = nil;
+        
+        self.backgroundColor = [UIColor whiteColor];
+        // Create image view (used at the top)
+        coverPhoto = [[UIImageView alloc] init];
+        coverPhoto.layer.zPosition = -5;
+        [self addSubview:coverPhoto];
+        
+        bodyView = [[ArticleBodyView alloc] initWithFrame:self.frame];
+        bodyView.contentSize = CGSizeMake([UIScreen mainScreen].applicationFrame.size.width, [UIScreen mainScreen].applicationFrame.size.height);
+        bodyView.pagingEnabled = NO;
+        [self addSubview:bodyView];
+        [self bringSubviewToFront:bodyView];
+    }
+    return self;
+}
+
 - (id)initWithFrame:(CGRect)frame article:(Article *)article
 {
     self = [super initWithFrame:frame];
@@ -48,6 +69,14 @@
         [self bringSubviewToFront:bodyView];
     }
     return self;
+}
+
+- (void)setArticle:(Article *)article
+{
+    _article = article;
+    UIImage* image = [UIImage imageNamed:article.imageName];
+    [coverPhoto setImage:image];
+    [bodyView setArticle:article];
 }
 
 
